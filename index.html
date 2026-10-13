@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>居眠り・挙手検知システム</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 20px 16px;
+    text-align: center;
+    font-family: sans-serif;
+    background: #f5f5f5;
+    color: #222;
+    transition: background 0.2s;
+}
+
+body.alert {
+    background: #fecaca;
+}
+
+.container {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 26px;
+    margin: 10px 0 16px;
+}
+
+h2 {
+    font-size: 18px;
+    margin: 4px 0 8px;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+button {
+    padding: 14px 32px;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background: #2563eb;
+    color: #fff;
+}
+
+button.secondary {
+    background: #64748b;
+}
+
+button:disabled {
+    background: #aaa;
+    cursor: default;
+}
+
+video {
+    display: block;
+    width: 100%;
+    max-width: 640px;
+    margin: 16px auto;
+    background: #000;
+    border-radius: 8px;
+    transform: scaleX(-1); /* 鏡のように反転 */
+}
+
+#status {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 8px 0;
+}
+
+#ear {
+    font-size: 15px;
+    color: #555;
+    margin: 4px 0;
+}
+
+#warning {
+    font-size: 28px;
+    font-weight: bold;
+    color: #dc2626;
+    min-height: 40px;
+    margin: 12px 0;
+}
+
+/* ---------- 挙手 ---------- */
+
+.raise-box {
+    background: #fff;
+    border: 3px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin: 16px auto;
+    max-width: 640px;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.raise-box.active {
+    background: #fef08a;
+    border-color: #eab308;
+}
+
+#raiseLabel {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.progress {
+    height: 12px;
+    background: #e2e8f0;
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 8px 0 4px;
+}
+
+#progressBar {
+    height: 100%;
+    width: 0%;
+    background: #22c55e;
+    transition: width 0.08s linear;
+}
+
+#progressText {
+    font-size: 14px;
+    color: #555;
+    min-height: 20px;
+    margin-bottom: 8px;
+}
+
+.raise-box button {
+    padding: 10px 24px;
+    font-size: 16px;
+}
+
+/* ---------- 設定・記録 ---------- */
+
+.panel {
+    background: #fff;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 16px auto;
+    max-width: 640px;
+    text-align: left;
+}
+
+.panel label {
+    display: block;
+    margin: 12px 0 4px;
+    font-size: 15px;
+}
+
+.panel label.check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0;
+}
+
+.panel input[type=range] {
+    width: 100%;
+}
+
+.panel input[type=checkbox] {
+    width: 20px;
+    height: 20px;
+}
+
+#logList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 180px;
+    overflow-y: auto;
+    font-size: 14px;
+}
+
+#logList li {
+    padding: 4px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.notice {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.7;
+    max-width: 640px;
+    margin: 16px auto;
+    text-align: left;
+}
+</style>
+
+</head>
+
+<body>
+<div class="container">
+
+<h1>居眠り・挙手検知システム</h1>
+
+<div class="buttons">
+    <button id="startButton" onclick="toggleDetection()">検知開始</button>
+    <button id="calibrateButton" class="secondary" onclick="startCalibration()" disabled>再キャリブレーション</button>
+</div>
+
+<video id="video" autoplay playsinline muted></video>
+
+<p id="status">検知開始を押してください</p>
+<p id="ear">EAR：---</p>
+<p id="warning"></p>
+
+<div id="raiseBox" class="raise-box">
+    <div id="raiseLabel">挙手していません</div>
+    <div class="progress"><div id="progressBar"></div></div>
+    <div id="progressText"></div>
+    <button id="lowerButton" class="secondary" onclick="lowerHand('ボタン')" disabled>手を下ろす</button>
+</div>
+
+<div class="panel">
+    <h2>挙手の記録</h2>
+    <ul id="logList"></ul>
+</div>
+
+<div class="panel">
+    <h2>設定</h2>
+
+    <label class="check">
+        <input type="checkbox" id="drowsyInput"> 居眠り検知
+    </label>
+    <label class="check">
+        <input type="checkbox" id="winkInput"> ウインク（1秒キープ）で挙手
+    </label>
+    <label class="check">
+        <input type="checkbox" id="handInput"> 手を挙げて（1秒キープ）挙手
+    </label>
+
+    <label for="closedTimeInput">
+        居眠り警告までの時間：<span id="closedTimeValue"></span>秒
+    </label>
+    <input type="range" id="closedTimeInput" min="1" max="10" step="0.5">
+
+    <label for="sensitivityInput">
+        目の感度：<span id="sensitivityValue"></span>
+        （高いほど「閉じている」と判定されやすい）
+    </label>
+    <input type="range" id="sensitivityInput" min="0.5" max="0.9" step="0.05">
+
+    <label for="volumeInput">
+        音量：<span id="volumeValue"></span>%
+    </label>
+    <input type="range" id="volumeInput" min="0" max="100" step="10">
+</div>
+
+<div class="notice">
+    【挙手のしかた】<br>
+    ・片目だけを1秒つぶる（ウインク）と挙手します。もう一度ウインクすると手を下ろします。<br>
+    ・頭より高く手を挙げて1秒キープしても挙手できます。手を下ろして1秒たつと解除されます。<br>
+    <br>
+    【注意】<br>
+    ・カメラ映像はこの端末の中だけで処理され、外部に送信・保存されることはありません。<br>
+    ・開始直後の3秒間はキャリブレーションです。両目を開けて画面を見ていてください。<br>
+    ・初回はAIモデルの読み込みに少し時間がかかります。<br>
+    ・別のタブやアプリに切り替えると検知は止まります。使用中はこの画面を表示したままにしてください。<br>
+    ・このシステムは補助ツールです。運転中などの安全をこれだけに頼らないでください。
+</div>
+
+</div>
+
+
+<script>
+
+// ============================
+// MediaPipe（バージョン固定）
+// ============================
+
+const MP_VERSION = "0.10.14";
+const MP_BASE = "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@" + MP_VERSION;
+
+const FACE_MODEL =
+    "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task";
+const HAND_MODEL =
+    "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task";
+
+
+// ============================
+// 画面要素
+// ============================
+
+const video = document.getElementById("video");
+const button = document.getElementById("startButton");
+const calibrateButton = document.getElementById("calibrateButton");
+const statusEl = document.getElementById("status");
+const earText = document.getElementById("ear");
+const warning = document.getElementById("warning");
+
+const raiseBox = document.getElementById("raiseBox");
+const raiseLabel = document.getElementById("raiseLabel");
+const progressBar = document.getElementById("progressBar");
+const progressText = document.getElementById("progressText");
+const lowerButton = document.getElementById("lowerButton");
+const logList = document.getElementById("logList");
+
+const drowsyInput = document.getElementById("drowsyInput");
+const winkInput = document.getElementById("winkInput");
+const handInput = document.getElementById("handInput");
+const closedTimeInput = document.getElementById("closedTimeInput");
+const sensitivityInput = document.getElementById("sensitivityInput");
+const volumeInput = document.getElementById("volumeInput");
+
+let faceLandmarker = null;
+let handLandmarker = null;
+let stream = null;
+let detecting = false;
+let audioContext = null;
+let wakeLock = null;
+let lastVideoTime = -1;
+
+
+// ============================
+// 固定の設定
+// ============================
+
+const OPEN_GRACE = 500;          // この時間開いていたら「起きた」とみなす（ms）
+const CALIBRATION_TIME = 3000;   // キャリブレーション時間（ms）
+const SMOOTH_FRAMES = 5;         // EARの平均をとるフレーム数
+const DEFAULT_OPEN_EAR = 0.28;   // キャリブレーション失敗時の開眼EAR
+
+const WINK_HOLD = 1000;          // ウインクを何ms続けたら挙手か
+const WINK_RELEASE = 300;        // ウインクが途切れても許容する時間（ms）
+const WINK_GAP = 0.25;           // 左右の目の開き具合の差（開眼時を1とした割合）
+
+const HAND_HOLD = 1000;          // 手を何ms挙げ続けたら挙手か
+const HAND_RELEASE = 1000;       // 手を下ろして何ms経ったら解除か
+
+
+// ============================
+// ユーザー設定（ブラウザに保存）
+// ============================
+
+const settings = {
+    drowsyEnabled: true,
+    winkEnabled: true,
+    handEnabled: true,
+    closedTime: 3,      // 秒
+    sensitivity: 0.7,   // 開眼時EARの何割を下回ったら「閉じている」か
+    volume: 50          // %
+};
+
+function loadSettings() {
+
+    try {
+        const saved = JSON.parse(localStorage.getItem("sleepySettings"));
+        if (saved) {
+            Object.assign(settings, saved);
+        }
+    } catch (e) {
+        // 保存できない環境でもデフォルト値で動く
+    }
+
+    drowsyInput.checked = settings.drowsyEnabled;
+    winkInput.checked = settings.winkEnabled;
+    handInput.checked = settings.handEnabled;
+    closedTimeInput.value = settings.closedTime;
+    sensitivityInput.value = settings.sensitivity;
+    volumeInput.value = settings.volume;
+
+    updateSettingLabels();
+
+}
+
+function saveSettings() {
+
+    try {
+        localStorage.setItem("sleepySettings", JSON.stringify(settings));
+    } catch (e) {
+        // 無視
+    }
+
+}
+
+function updateSettingLabels() {
+
+    document.getElementById("closedTimeValue").textContent =
+        Number(settings.closedTime).toFixed(1);
+
+    document.getElementById("sensitivityValue").textContent =
+        Math.round(settings.sensitivity * 100) + "%";
+
+    document.getElementById("volumeValue").textContent =
+        settings.volume;
+
+}
+
+drowsyInput.addEventListener("change", () => {
+    settings.drowsyEnabled = drowsyInput.checked;
+    if (!settings.drowsyEnabled) {
+        stopWarning();
+        eyesClosedStart = null;
+    }
+    saveSettings();
+});
+
+winkInput.addEventListener("change", () => {
+    settings.winkEnabled = winkInput.checked;
+    winkHold.reset();
+    saveSettings();
+});
+
+handInput.addEventListener("change", () => {
+    settings.handEnabled = handInput.checked;
+    handHold.reset();
+    saveSettings();
+});
+
+closedTimeInput.addEventListener("input", () => {
+    settings.closedTime = Number(closedTimeInput.value);
+    updateSettingLabels();
+    saveSettings();
+});
+
+sensitivityInput.addEventListener("input", () => {
+    settings.sensitivity = Number(sensitivityInput.value);
+    updateSettingLabels();
+    saveSettings();
+});
+
+volumeInput.addEventListener("input", () => {
+    settings.volume = Number(volumeInput.value);
+    updateSettingLabels();
+    saveSettings();
+});
+
+
+// ============================
+// 「一定時間続いたら発動」を判定する部品
+// ============================
+
+class HoldDetector {
+
+    constructor(holdMs, releaseMs) {
+        this.holdMs = holdMs;
+        this.releaseMs = releaseMs;
+        this.reset();
+    }
+
+    reset() {
+        this.start = null;
+        this.lastActive = null;
+        this.fired = false;
+    }
+
+    // active: 今その動作をしているか
+    // 戻り値: justFired（今発動した）, justReleased（発動後に動作をやめた）, progress（0〜1）
+    update(active, now) {
+
+        let justFired = false;
+        let justReleased = false;
+
+        if (active) {
+
+            if (this.start === null) {
+                this.start = now;
+            }
+
+            this.lastActive = now;
+
+            if (!this.fired && now - this.start >= this.holdMs) {
+                this.fired = true;
+                justFired = true;
+            }
+
+        } else if (this.start !== null && now - this.lastActive >= this.releaseMs) {
+
+            justReleased = this.fired;
+            this.reset();
+
+        }
+
+        const progress = (active && !this.fired && this.start !== null)
+            ? Math.min((now - this.start) / this.holdMs, 1)
+            : 0;
+
+        return { justFired, justReleased, progress };
+    }
+
+}
+
+const winkHold = new HoldDetector(WINK_HOLD, WINK_RELEASE);
+const handHold = new HoldDetector(HAND_HOLD, HAND_RELEASE);
+
+
+// ============================
+// 状態
+// ============================
+
+let openRight = null;    // キャリブレーションで測った開眼時のEAR（本人の右目）
+let openLeft = null;     // 同（本人の左目）
+
+let rightHistory = [];
+let leftHistory = [];
+
+let calibrating = false;
+let calibrationStart = null;
+let samplesRight = [];
+let samplesLeft = [];
+
+let eyesClosedStart = null;
+let eyesOpenStart = null;
+
+let warningActive = false;
+let beepTimer = null;
+
+let raised = false;
+let raisedSource = null;
+let raisedAt = null;
+
+let winkProgress = 0;
+let handProgress = 0;
+
+
+loadSettings();
+
+
+// ============================
+// 距離（ピクセル換算）
+// ============================
+
+function distance(a, b) {
+
+    const w = video.videoWidth;
+    const h = video.videoHeight;
+
+    return Math.hypot(
+        (a.x - b.x) * w,
+        (a.y - b.y) * h
+    );
+
+}
+
+
+// ============================
+// EAR
+// ============================
+
+function calculateEAR(landmarks, points) {
+
+    const p1 = landmarks[points[0]];
+    const p2 = landmarks[points[1]];
+    const p3 = landmarks[points[2]];
+    const p4 = landmarks[points[3]];
+    const p5 = landmarks[points[4]];
+    const p6 = landmarks[points[5]];
+
+    const vertical1 = distance(p2, p6);
+    const vertical2 = distance(p3, p5);
+
+    const horizontal = distance(p1, p4);
+
+    if (horizontal === 0) return 0;
+
+    return (vertical1 + vertical2) / (2 * horizontal);
+}
+
+function average(list) {
+    return list.reduce((sum, v) => sum + v, 0) / list.length;
+}
+
+function median(list) {
+    const sorted = [...list].sort((a, b) => a - b);
+    return sorted[Math.floor(sorted.length / 2)];
+}
+
+
+// ============================
+// 開始 / 停止の切り替え
+// ============================
+
+function toggleDetection() {
+
+    if (detecting) {
+        stopDetection();
+    } else {
+        startDetection();
+    }
+
+}
+
+
+// ============================
+// AIモデルの読み込み
+// ============================
+
+async function createTask(TaskClass, fileset, modelPath, options) {
+
+    // GPUで動かせなければCPUで動かす
+    for (const delegate of ["GPU", "CPU"]) {
+
+        try {
+            return await TaskClass.createFromOptions(fileset, {
+                baseOptions: {
+                    modelAssetPath: modelPath,
+                    delegate: delegate
+                },
+                runningMode: "VIDEO",
+                ...options
+            });
+        } catch (e) {
+            console.warn(delegate + "での読み込みに失敗", e);
+        }
+
+    }
+
+    throw new Error("モデルの読み込みに失敗しました");
+
+}
+
+async function loadModels() {
+
+    if (faceLandmarker && handLandmarker) return;
+
+    const vision = await import(MP_BASE + "/vision_bundle.mjs");
+
+    const fileset = await vision.FilesetResolver.forVisionTasks(MP_BASE + "/wasm");
+
+    if (!faceLandmarker) {
+        faceLandmarker = await createTask(vision.FaceLandmarker, fileset, FACE_MODEL, {
+            numFaces: 1,
+            minFaceDetectionConfidence: 0.5,
+            minFacePresenceConfidence: 0.5,
+            minTrackingConfidence: 0.5
+        });
+    }
+
+    if (!handLandmarker) {
+        handLandmarker = await createTask(vision.HandLandmarker, fileset, HAND_MODEL, {
+            numHands: 2,
+            minHandDetectionConfidence: 0.5,
+            minHandPresenceConfidence: 0.5,
+            minTrackingConfidence: 0.5
+        });
+    }
+
+}
+
+
+// ============================
+// 検知開始
+// ============================
+
+async function startDetection() {
+
+    // HTTPSでないとカメラが使えない
+    if (!window.isSecureContext ||
+        !navigator.mediaDevices ||
+        !navigator.mediaDevices.getUserMedia) {
+
+        statusEl.textContent =
+            "このページはHTTPSで開いてください（カメラが使えません）";
+        return;
+    }
+
+    button.disabled = true;
+
+    // ボタンを押したタイミングで音声を準備（ブラウザの自動再生制限対策）
+    try {
+        if (!audioContext) {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioContext.state === "suspended") {
+            await audioContext.resume();
+        }
+    } catch (e) {
+        console.warn("音声を初期化できません", e);
+    }
+
+    // AIモデル
+    try {
+
+        statusEl.textContent = "AIモデルを読み込んでいます...（初回は少し時間がかかります）";
+
+        await loadModels();
+
+    } catch (error) {
+
+        console.error(error);
+
+        statusEl.textContent =
+            "AIモデルの読み込みに失敗しました。通信環境を確認して再読み込みしてください";
+
+        button.disabled = false;
+        return;
+    }
+
+    // カメラ
+    try {
+
+        statusEl.textContent = "カメラを起動しています...";
+
+        stream = await navigator.mediaDevices.getUserMedia({
+            video: {
+                facingMode: "user",   // スマホではインカメラ
+                width: { ideal: 640 },
+                height: { ideal: 480 }
+            },
+            audio: false
+        });
+
+        video.srcObject = stream;
+
+        await video.play();
+
+        detecting = true;
+        lastVideoTime = -1;
+
+        button.textContent = "検知停止";
+        button.disabled = false;
+        calibrateButton.disabled = false;
+
+        await requestWakeLock();
+
+        startCalibration();
+
+        detectFrame();
+
+    } catch (error) {
+
+        console.error(error);
+
+        statusEl.textContent = cameraErrorMessage(error);
+
+        stopStream();
+
+        detecting = false;
+        button.textContent = "検知開始";
+        button.disabled = false;
+
+    }
+
+}
+
+
+function cameraErrorMessage(error) {
+
+    switch (error && error.name) {
+        case "NotAllowedError":
+            return "カメラの使用が許可されていません。ブラウザの設定で許可してください";
+        case "NotFoundError":
+            return "カメラが見つかりません";
+        case "NotReadableError":
+            return "カメラが他のアプリで使用中です。他のアプリを閉じてください";
+        default:
+            return "検知エラーが発生しました。ページを再読み込みしてください";
+    }
+
+}
+
+
+// ============================
+// 検知停止
+// ============================
+
+function stopDetection() {
+
+    detecting = false;
+    calibrating = false;
+
+    stopStream();
+    stopWarning();
+    lowerHand("検知停止");
+    resetState();
+    releaseWakeLock();
+
+    button.textContent = "検知開始";
+    calibrateButton.disabled = true;
+    statusEl.textContent = "検知開始を押してください";
+    earText.textContent = "EAR：---";
+
+}
+
+
+function stopStream() {
+
+    if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+        stream = null;
+    }
+
+    video.srcObject = null;
+
+}
+
+
+function resetState() {
+
+    rightHistory = [];
+    leftHistory = [];
+    eyesClosedStart = null;
+    eyesOpenStart = null;
+    winkHold.reset();
+    handHold.reset();
+    winkProgress = 0;
+    handProgress = 0;
+    updateProgress();
+
+}
+
+
+// ============================
+// 画面スリープ防止
+// ============================
+
+async function requestWakeLock() {
+
+    try {
+        if ("wakeLock" in navigator) {
+            wakeLock = await navigator.wakeLock.request("screen");
+        }
+    } catch (e) {
+        console.warn("スリープ防止を有効にできません", e);
+    }
+
+}
+
+function releaseWakeLock() {
+
+    if (wakeLock) {
+        wakeLock.release().catch(() => {});
+        wakeLock = null;
+    }
+
+}
+
+
+// タブの切り替え対策
+document.addEventListener("visibilitychange", () => {
+
+    if (!detecting) return;
+
+    if (document.visibilityState === "visible") {
+
+        // 戻ってきたら状態をリセットして再開
+        resetState();
+        requestWakeLock();
+
+        if (audioContext && audioContext.state === "suspended") {
+            audioContext.resume().catch(() => {});
+        }
+
+    } else {
+
+        // 非表示中は検知できないので警告を止める
+        stopWarning();
+        resetState();
+
+    }
+
+});
+
+
+// ============================
+// 検出ループ
+// ============================
+
+function detectFrame() {
+
+    if (!detecting) return;
+
+    // 新しいフレームが来たときだけ処理する
+    if (!document.hidden &&
+        video.readyState >= 2 &&
+        video.currentTime !== lastVideoTime) {
+
+        lastVideoTime = video.currentTime;
+
+        const timestamp = performance.now();
+
+        try {
+
+            const faceResult = faceLandmarker.detectForVideo(video, timestamp);
+
+            const handResult = settings.handEnabled
+                ? handLandmarker.detectForVideo(video, timestamp)
+                : null;
+
+            onResults(faceResult, handResult, Date.now());
+
+        } catch (error) {
+            console.error(error);
+        }
+
+    }
+
+    requestAnimationFrame(detectFrame);
+
+}
+
+
+// ============================
+// キャリブレーション
+// ============================
+
+function startCalibration() {
+
+    stopWarning();
+    resetState();
+
+    calibrating = true;
+    calibrationStart = null;
+    samplesRight = [];
+    samplesLeft = [];
+
+    statusEl.textContent = "顔を検出しています...";
+
+}
+
+
+function finishCalibration() {
+
+    calibrating = false;
+
+    if (samplesRight.length >= 10) {
+
+        // 中央値を開眼時のEARとして使う（まばたきの影響を受けにくい）
+        openRight = median(samplesRight);
+        openLeft = median(samplesLeft);
+
+    } else {
+
+        openRight = null;
+        openLeft = null;
+
+    }
+
+}
+
+
+// ============================
+// 結果
+// ============================
+
+function onResults(faceResult, handResult, now) {
+
+    if (!detecting) return;
+
+    const face =
+        faceResult && faceResult.faceLandmarks && faceResult.faceLandmarks.length > 0
+            ? faceResult.faceLandmarks[0]
+            : null;
+
+    const hands =
+        handResult && handResult.landmarks ? handResult.landmarks : [];
+
+
+    // 手による挙手（顔が見えなくても判定する）
+    if (!calibrating) {
+        handleHand(face, hands, now);
+    }
+
+
+    // ----------------------------
+    // 顔なし
+    // ----------------------------
+
+    if (!face) {
+
+        rightHistory = [];
+        leftHistory = [];
+        earText.textContent = "EAR：---";
+
+        handleWink(false, now);
+
+        if (calibrating) {
+            statusEl.textContent = "キャリブレーション中：顔をカメラに向けてください";
+            updateProgress();
+            return;
+        }
+
+        // 目を閉じた状態から顔が消えた → うつむいた可能性があるのでタイマー継続
+        if (settings.drowsyEnabled && eyesClosedStart !== null) {
+
+            statusEl.textContent = "😴 顔が見えません（うつむいている可能性）";
+            eyesOpenStart = null;
+            checkClosedTime(now);
+
+        } else {
+
+            statusEl.textContent = "顔を検出できません";
+
+        }
+
+        updateProgress();
+        return;
+    }
+
+
+    // 本人の右目（映像では左側）
+    const rightEAR = calculateEAR(face, [33, 160, 158, 133, 153, 144]);
+
+    // 本人の左目（映像では右側）
+    const leftEAR = calculateEAR(face, [362, 385, 387, 263, 373, 380]);
+
+
+    // ----------------------------
+    // キャリブレーション中
+    // ----------------------------
+
+    if (calibrating) {
+
+        if (calibrationStart === null) {
+            calibrationStart = now;
+        }
+
+        samplesRight.push(rightEAR);
+        samplesLeft.push(leftEAR);
+
+        const remain = Math.ceil(
+            (CALIBRATION_TIME - (now - calibrationStart)) / 1000
+        );
+
+        statusEl.textContent =
+            "キャリブレーション中… 両目を開けて画面を見てください（残り" +
+            Math.max(remain, 0) + "秒）";
+
+        earText.textContent =
+            "EAR 右目 " + rightEAR.toFixed(3) + " / 左目 " + leftEAR.toFixed(3);
+
+        if (now - calibrationStart >= CALIBRATION_TIME) {
+            finishCalibration();
+        }
+
+        return;
+    }
+
+
+    // ----------------------------
+    // 平滑化（直近数フレームの平均）
+    // ----------------------------
+
+    rightHistory.push(rightEAR);
+    leftHistory.push(leftEAR);
+
+    if (rightHistory.length > SMOOTH_FRAMES) rightHistory.shift();
+    if (leftHistory.length > SMOOTH_FRAMES) leftHistory.shift();
+
+    const right = average(rightHistory);
+    const left = average(leftHistory);
+
+    // 開眼時を1としたときの開き具合
+    const openR = right / (openRight || DEFAULT_OPEN_EAR);
+    const openL = left / (openLeft || DEFAULT_OPEN_EAR);
+
+    const rightClosed = openR < settings.sensitivity;
+    const leftClosed = openL < settings.sensitivity;
+
+    earText.textContent =
+        "開き具合 右目 " + Math.round(openR * 100) + "% / 左目 " +
+        Math.round(openL * 100) + "%（" +
+        Math.round(settings.sensitivity * 100) + "%未満で閉じている判定）";
+
+
+    // ----------------------------
+    // ウインク（片目だけ閉じている）
+    // ----------------------------
+
+    const winking =
+        settings.winkEnabled &&
+        rightClosed !== leftClosed &&
+        Math.abs(openR - openL) >= WINK_GAP;
+
+    handleWink(winking, now);
+
+
+    // ----------------------------
+    // 両目を閉じている → 居眠り判定
+    // ----------------------------
+
+    if (rightClosed && leftClosed) {
+
+        statusEl.textContent = "😴 目：閉じています";
+
+        eyesOpenStart = null;
+
+        if (settings.drowsyEnabled) {
+
+            if (eyesClosedStart === null) {
+                eyesClosedStart = now;
+            }
+
+            checkClosedTime(now);
+        }
+
+    }
+
+    // ----------------------------
+    // 目が開いている（ウインク含む）
+    // ----------------------------
+
+    else {
+
+        statusEl.textContent = winking ? "😉 ウインク中" : "👁️ 目：開いています";
+
+        if (eyesOpenStart === null) {
+            eyesOpenStart = now;
+        }
+
+        // 一定時間開いていたらリセット（一瞬のブレでは解除しない）
+        if (now - eyesOpenStart >= OPEN_GRACE) {
+            eyesClosedStart = null;
+            stopWarning();
+        }
+
+    }
+
+    updateProgress();
+
+}
+
+
+// ============================
+// ウインクによる挙手
+// ============================
+
+function handleWink(winking, now) {
+
+    const r = winkHold.update(winking, now);
+
+    // ウインクするたびに 挙手 ⇔ 下ろす を切り替える
+    if (r.justFired) {
+        if (raised) {
+            lowerHand("ウインク");
+        } else {
+            raiseHand("ウインク");
+        }
+    }
+
+    winkProgress = r.progress;
+
+}
+
+
+// ============================
+// 手による挙手
+// ============================
+
+function isHandUp(face, hand) {
+
+    // 手のいちばん上の点
+    let top = 1;
+    for (const p of hand) {
+        top = Math.min(top, p.y);
+    }
+
+    const wrist = hand[0];
+
+    if (face) {
+        // 指先がおでこより上、手首があごより上
+        return top < face[10].y && wrist.y < face[152].y;
+    }
+
+    // 顔が見えないときは画面上部にあるかで判定
+    return top < 0.25 && wrist.y < 0.5;
+
+}
+
+function handleHand(face, hands, now) {
+
+    const up =
+        settings.handEnabled &&
+        hands.some(hand => isHandUp(face, hand));
+
+    const r = handHold.update(up, now);
+
+    if (r.justFired && !raised) {
+        raiseHand("手");
+    }
+
+    // 手で挙手した場合は、手を下ろしたら解除
+    if (r.justReleased && raised && raisedSource === "手") {
+        lowerHand("手を下ろした");
+    }
+
+    handProgress = r.progress;
+
+}
+
+
+// ============================
+// 挙手の状態管理
+// ============================
+
+function raiseHand(source) {
+
+    if (raised) return;
+
+    raised = true;
+    raisedSource = source;
+    raisedAt = Date.now();
+
+    raiseBox.classList.add("active");
+    lowerButton.disabled = false;
+
+    addLog("✋ 挙手しました（" + source + "）");
+    chime();
+
+    notifyRaise();
+    updateProgress();
+
+}
+
+function lowerHand(reason) {
+
+    if (!raised) return;
+
+    raised = false;
+    raisedSource = null;
+    raisedAt = null;
+
+    raiseBox.classList.remove("active");
+    lowerButton.disabled = true;
+
+    addLog("手を下ろしました（" + reason + "）");
+
+    notifyRaise();
+    updateProgress();
+
+}
+
+// 他のプログラムから受け取れるように、挙手の変化をイベントとして出す
+// 例：window.addEventListener("handraise", e => console.log(e.detail));
+function notifyRaise() {
+
+    window.dispatchEvent(new CustomEvent("handraise", {
+        detail: {
+            raised: raised,
+            source: raisedSource,
+            time: new Date().toISOString()
+        }
+    }));
+
+}
+
+function updateProgress() {
+
+    if (raised) {
+
+        const sec = Math.floor((Date.now() - raisedAt) / 1000);
+        raiseLabel.textContent = "✋ 挙手中（" + raisedSource + "）・" + sec + "秒";
+
+    } else {
+
+        raiseLabel.textContent = "挙手していません";
+
+    }
+
+    const progress = Math.max(winkProgress, handProgress);
+
+    progressBar.style.width = Math.round(progress * 100) + "%";
+
+    if (progress > 0) {
+
+        const what = winkProgress >= handProgress ? "ウインク" : "手";
+        const action = raised && what === "ウインク" ? "手を下ろす" : "挙手";
+
+        progressText.textContent = what + "で" + action + "判定中…";
+
+    } else {
+
+        progressText.textContent = "";
+
+    }
+
+}
+
+function addLog(text) {
+
+    const time = new Date().toLocaleTimeString("ja-JP");
+
+    const li = document.createElement("li");
+    li.textContent = time + "　" + text;
+
+    logList.prepend(li);
+
+}
+
+
+// ============================
+// 居眠りの閉眼時間チェック
+// ============================
+
+function checkClosedTime(now) {
+
+    if (eyesClosedStart === null) return;
+
+    if (now - eyesClosedStart >= settings.closedTime * 1000) {
+        showWarning();
+    }
+
+}
+
+
+// ============================
+// 居眠り警告
+// ============================
+
+function showWarning() {
+
+    if (warningActive) return;
+
+    warningActive = true;
+
+    warning.textContent = "⚠️ 居眠りの可能性があります ⚠️";
+    document.body.classList.add("alert");
+
+    // 目を開けるまで1秒ごとに鳴らし続ける
+    beep();
+    beepTimer = setInterval(beep, 1000);
+
+}
+
+
+function stopWarning() {
+
+    if (!warningActive) return;
+
+    warningActive = false;
+
+    warning.textContent = "";
+    document.body.classList.remove("alert");
+
+    if (beepTimer) {
+        clearInterval(beepTimer);
+        beepTimer = null;
+    }
+
+}
+
+
+// ============================
+// 音
+// ============================
+
+function playTone(frequency, startOffset, duration, volumeScale) {
+
+    if (!audioContext || settings.volume <= 0) return;
+
+    try {
+
+        const oscillator = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+
+        oscillator.connect(gain);
+        gain.connect(audioContext.destination);
+
+        oscillator.frequency.value = frequency;
+        oscillator.type = "sine";
+
+        gain.gain.value = (settings.volume / 100) * volumeScale;
+
+        const t = audioContext.currentTime + startOffset;
+        oscillator.start(t);
+        oscillator.stop(t + duration);
+
+    } catch (e) {
+        console.warn(e);
+    }
+
+}
+
+// 居眠り警告音（＋対応端末ではバイブ）
+function beep() {
+
+    if (navigator.vibrate) {
+        navigator.vibrate(400);
+    }
+
+    playTone(880, 0, 0.5, 0.6);
+
+}
+
+// 挙手の合図音（ピンポン）
+function chime() {
+
+    playTone(988, 0, 0.15, 0.4);
+    playTone(1319, 0.15, 0.3, 0.4);
+
+}
+
+</script>
+
+</body>
+</html>
