@@ -39,6 +39,14 @@ h2 {
     margin: 4px 0 8px;
 }
 
+h3 {
+    font-size: 15px;
+    margin: 16px 0 4px;
+    color: #475569;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 12px;
+}
+
 .buttons {
     display: flex;
     gap: 10px;
@@ -58,6 +66,11 @@ button {
 
 button.secondary {
     background: #64748b;
+}
+
+button.small {
+    padding: 6px 14px;
+    font-size: 14px;
 }
 
 button:disabled {
@@ -81,7 +94,7 @@ video {
     margin: 8px 0;
 }
 
-#ear {
+.info {
     font-size: 15px;
     color: #555;
     margin: 4px 0;
@@ -93,6 +106,399 @@ video {
     color: #dc2626;
     min-height: 40px;
     margin: 12px 0;
+}
+
+#eventText {
+    font-size: 22px;
+    font-weight: bold;
+    color: #b45309;
+    min-height: 30px;
+    margin: 0 0 8px;
+}
+
+#cooldownText {
+    font-size: 14px;
+    color: #64748b;
+    min-height: 20px;
+    margin: 0 0 8px;
+}
+
+/* ---------- 眠気メーター ---------- */
+
+.meter-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin: 8px auto 12px;
+    max-width: 640px;
+}
+
+.meter-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.meter-title {
+    font-size: 15px;
+    color: #475569;
+}
+
+#meterLevel {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.meter {
+    height: 18px;
+    background: #e2e8f0;
+    border-radius: 9px;
+    overflow: hidden;
+    margin: 8px 0 6px;
+}
+
+#meterBar {
+    height: 100%;
+    width: 0%;
+    background: #22c55e;
+    transition: width 0.4s, background 0.4s;
+}
+
+#meterDetail {
+    font-size: 13px;
+    color: #555;
+    text-align: left;
+}
+
+/* ---------- レポート ---------- */
+
+#report {
+    border: 3px solid #2563eb;
+}
+
+#report[hidden] {
+    display: none;
+}
+
+#reportComment {
+    font-size: 17px;
+    font-weight: bold;
+    margin: 8px 0 12px;
+}
+
+#reportTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+}
+
+#reportTable th,
+#reportTable td {
+    padding: 6px 4px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+#reportTable td {
+    text-align: right;
+    font-weight: bold;
+}
+
+.report-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+/* ---------- 眠気グラフ ---------- */
+
+.chart-wrap {
+    position: relative;
+    margin: 16px 0 4px;
+}
+
+.chart-title {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.chart-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    font-size: 13px;
+    color: #475569;
+    margin-bottom: 4px;
+}
+
+.chart-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.swatch-line {
+    width: 16px;
+    height: 2px;
+    background: #2563eb;
+    border-radius: 1px;
+}
+
+.swatch-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+}
+
+#reportChart svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    touch-action: none;
+}
+
+.chart-tip {
+    position: absolute;
+    pointer-events: none;
+    background: #1e293b;
+    color: #fff;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+    transform: translate(-50%, -120%);
+    display: none;
+}
+
+.chart-empty {
+    font-size: 14px;
+    color: #64748b;
+    padding: 12px 0;
+}
+
+/* ---------- URL設定 ---------- */
+
+#urlBanner {
+    background: #dbeafe;
+    color: #1e3a8a;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 14px;
+    margin: 0 auto 12px;
+    max-width: 640px;
+}
+
+#urlBanner[hidden] {
+    display: none;
+}
+
+.mode-links {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 6px 0 4px;
+}
+
+.mode-links a {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 8px;
+    background: #e2e8f0;
+    color: #1e293b;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.mode-links a.current {
+    background: #2563eb;
+    color: #fff;
+}
+
+.hint {
+    font-size: 13px;
+    color: #64748b;
+    margin: 4px 0;
+}
+
+/* ---------- 写真 ---------- */
+
+#photoPanel[hidden] {
+    display: none;
+}
+
+.photo-item {
+    margin: 12px 0;
+    text-align: center;
+}
+
+.photo-item img {
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 6px;
+}
+
+.photo-item a {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 8px;
+    background: #2563eb;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* ---------- 研究モード（同意・アンケート） ---------- */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.6);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 24px 16px;
+    overflow-y: auto;
+    z-index: 20;
+}
+
+.modal[hidden] {
+    display: none;
+}
+
+.modal-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 560px;
+    width: 100%;
+    text-align: left;
+}
+
+.modal-box h2 {
+    font-size: 20px;
+    margin: 0 0 12px;
+}
+
+.modal-box p,
+.modal-box li {
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.modal-box ul {
+    padding-left: 20px;
+    margin: 8px 0;
+}
+
+.modal-box .q {
+    font-weight: bold;
+    margin: 16px 0 6px;
+}
+
+.modal-box input[type=text],
+.modal-box select {
+    font-size: 16px;
+    padding: 8px 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.kss {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.kss label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: #f1f5f9;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.kss input {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.kss b {
+    flex-shrink: 0;
+    width: 14px;
+}
+
+.modal-error {
+    color: #dc2626;
+    font-size: 14px;
+    min-height: 20px;
+    margin: 8px 0 0;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
+
+.modal-buttons button {
+    padding: 12px 22px;
+    font-size: 16px;
+}
+
+#researchStatus {
+    font-size: 14px;
+    margin: 10px 0 0;
+    min-height: 20px;
+}
+
+#flash {
+    position: fixed;
+    inset: 0;
+    background: #fff;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s;
+    z-index: 10;
+}
+
+#flash.on {
+    opacity: 0.9;
+    transition: none;
+}
+
+/* ---------- 回数 ---------- */
+
+.counts {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 8px 0 12px;
+}
+
+.count {
+    background: #fff;
+    border-radius: 8px;
+    padding: 8px 16px;
+    min-width: 110px;
+}
+
+.count .label {
+    font-size: 13px;
+    color: #555;
+}
+
+.count .num {
+    font-size: 26px;
+    font-weight: bold;
 }
 
 /* ---------- 挙手 ---------- */
@@ -156,6 +562,12 @@ video {
     text-align: left;
 }
 
+.panel-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .panel label {
     display: block;
     margin: 12px 0 4px;
@@ -182,7 +594,7 @@ video {
     list-style: none;
     padding: 0;
     margin: 0;
-    max-height: 180px;
+    max-height: 200px;
     overflow-y: auto;
     font-size: 14px;
 }
@@ -209,16 +621,71 @@ video {
 
 <h1>居眠り・挙手検知システム</h1>
 
+<div id="urlBanner" hidden></div>
+
 <div class="buttons">
     <button id="startButton" onclick="toggleDetection()">検知開始</button>
     <button id="calibrateButton" class="secondary" onclick="startCalibration()" disabled>再キャリブレーション</button>
 </div>
 
+<div id="report" class="panel" hidden>
+    <h2>📋 今回のレポート</h2>
+    <div id="reportComment"></div>
+    <table id="reportTable"></table>
+    <div class="chart-wrap">
+        <div class="chart-title">眠気の推移</div>
+        <div class="chart-legend">
+            <span><i class="swatch-line"></i>眠気メーター</span>
+            <span><i class="swatch-dot" style="background:#dc2626"></i>😴 居眠り</span>
+            <span><i class="swatch-dot" style="background:#d97706"></i>🥱 あくび</span>
+            <span><i class="swatch-dot" style="background:#64748b"></i>🚶 離席</span>
+        </div>
+        <div id="reportChart"></div>
+        <div id="chartTip" class="chart-tip"></div>
+    </div>
+    <p id="researchStatus"></p>
+    <div class="report-buttons">
+        <button class="small" onclick="copyReport()">テキストをコピー</button>
+        <button id="saveDataButton" class="small secondary" onclick="saveResearchFile()" hidden>結果をファイルで保存</button>
+        <button class="small secondary" onclick="closeReport()">閉じる</button>
+    </div>
+</div>
+
 <video id="video" autoplay playsinline muted></video>
 
 <p id="status">検知開始を押してください</p>
-<p id="ear">EAR：---</p>
+<p id="ear" class="info">目：---</p>
+<p id="mouth" class="info">口：---</p>
 <p id="warning"></p>
+<p id="eventText"></p>
+<p id="cooldownText"></p>
+
+<div class="meter-box">
+    <div class="meter-head">
+        <span class="meter-title">😪 眠気メーター</span>
+        <span id="meterLevel">---</span>
+    </div>
+    <div class="meter"><div id="meterBar"></div></div>
+    <div id="meterDetail">検知を開始すると測定します</div>
+</div>
+
+<div class="counts">
+    <div class="count"><div class="label">😴 居眠り</div><div class="num" id="countDrowsy">0</div></div>
+    <div class="count"><div class="label">🥱 あくび</div><div class="num" id="countYawn">0</div></div>
+    <div class="count"><div class="label">🚶 離席</div><div class="num" id="countAway">0</div></div>
+</div>
+
+<div id="photoPanel" class="panel" hidden>
+    <h2>📸 居眠り写真</h2>
+    <p class="hint">写真はこの端末の中にだけ一時的に置かれ、どこにも送信されません。ページを閉じると消えるので、残したいものはダウンロードしてください。</p>
+    <div id="photoList"></div>
+</div>
+
+<div id="flash"></div>
+
+<div id="modal" class="modal" hidden>
+    <div id="modalBox" class="modal-box" role="dialog" aria-modal="true"></div>
+</div>
 
 <div id="raiseBox" class="raise-box">
     <div id="raiseLabel">挙手していません</div>
@@ -228,25 +695,51 @@ video {
 </div>
 
 <div class="panel">
-    <h2>挙手の記録</h2>
+    <div class="panel-head">
+        <h2>記録</h2>
+        <button class="small secondary" onclick="resetCounts()">回数リセット</button>
+    </div>
     <ul id="logList"></ul>
 </div>
 
 <div class="panel">
     <h2>設定</h2>
 
+    <h3>モードをかんたん切り替え</h3>
+    <div class="mode-links">
+        <a href="?mode=class" data-mode="class">🏫 授業</a>
+        <a href="?mode=study" data-mode="study">📚 自習</a>
+        <a href="?mode=drive" data-mode="drive">🚗 運転</a>
+    </div>
+    <p class="hint">このリンクのURLを配ると、同じモードで使ってもらえます。</p>
+    <button class="small secondary" onclick="copySettingsUrl()">今の設定をURLにしてコピー</button>
+
+    <h3>検知する項目</h3>
     <label class="check">
-        <input type="checkbox" id="drowsyInput"> 居眠り検知
+        <input type="checkbox" id="drowsyInput"> 😴 居眠り（目を閉じ続ける）
     </label>
     <label class="check">
-        <input type="checkbox" id="winkInput"> ウインク（1秒キープ）で挙手
+        <input type="checkbox" id="yawnInput"> 🥱 あくび（口を大きく開け続ける）
     </label>
     <label class="check">
-        <input type="checkbox" id="handInput"> 手を挙げて（1秒キープ）挙手
+        <input type="checkbox" id="awayInput"> 🚶 離席（顔が映らない状態が続く）
+    </label>
+    <label class="check">
+        <input type="checkbox" id="photoInput"> 📸 居眠りが決まった回数になったら写真を撮る
+    </label>
+    <label class="check">
+        <input type="checkbox" id="missionInput"> 🔔 起こしミッション（居眠り警告のあと、ミッションをクリアするまで音が止まらない）
+    </label>
+    <label class="check">
+        <input type="checkbox" id="winkInput"> 😉 ウインク（1秒キープ）で挙手
+    </label>
+    <label class="check">
+        <input type="checkbox" id="handInput"> ✋ 手を挙げて（1秒キープ）挙手
     </label>
 
+    <h3>居眠り</h3>
     <label for="closedTimeInput">
-        居眠り警告までの時間：<span id="closedTimeValue"></span>秒
+        警告までの時間：<span id="closedTimeValue"></span>秒
     </label>
     <input type="range" id="closedTimeInput" min="1" max="10" step="0.5">
 
@@ -256,6 +749,35 @@ video {
     </label>
     <input type="range" id="sensitivityInput" min="0.5" max="0.9" step="0.05">
 
+    <label for="photoCountInput">
+        写真を撮る回数：居眠り<span id="photoCountValue"></span>回ごと
+    </label>
+    <input type="range" id="photoCountInput" min="1" max="10" step="1">
+
+    <h3>あくび</h3>
+    <label for="yawnOpenInput">
+        口の開き具合のしきい値：<span id="yawnOpenValue"></span>（小さいほど敏感）
+    </label>
+    <input type="range" id="yawnOpenInput" min="0.3" max="0.9" step="0.05">
+
+    <label for="yawnTimeInput">
+        あくびと判定するまでの時間：<span id="yawnTimeValue"></span>秒
+    </label>
+    <input type="range" id="yawnTimeInput" min="0.5" max="4" step="0.5">
+
+    <h3>離席</h3>
+    <label for="awayTimeInput">
+        離席と判定するまでの時間：<span id="awayTimeValue"></span>秒
+    </label>
+    <input type="range" id="awayTimeInput" min="5" max="60" step="5">
+
+    <h3>共通</h3>
+    <label for="cooldownInput">
+        クールタイム：<span id="cooldownValue"></span>秒
+        （一度数えたら、この時間は同じ項目を数えない）
+    </label>
+    <input type="range" id="cooldownInput" min="0" max="60" step="5">
+
     <label for="volumeInput">
         音量：<span id="volumeValue"></span>%
     </label>
@@ -263,13 +785,21 @@ video {
 </div>
 
 <div class="notice">
-    【挙手のしかた】<br>
-    ・片目だけを1秒つぶる（ウインク）と挙手します。もう一度ウインクすると手を下ろします。<br>
+    【使い方】<br>
+    ・開始直後の3秒間はキャリブレーションです。両目を開けて、口を閉じて画面を見ていてください。<br>
+    ・口を大きく開けた状態が続くと「あくび」として数えます（話しているときの短い口の開きでは数えません）。<br>
+    ・眠気メーターは、直近1分間の「目を閉じていた時間の割合」「ゆっくりしたまばたき」と、直近5分間の「あくび」から眠気を0〜100で表します。60を超えると休憩をすすめます。<br>
+    ・顔が映らない状態が続くと「離席」として記録します。目を閉じたまま顔が見えなくなった場合は、離席ではなく居眠りとして扱います。<br>
+    ・写真の機能がオンのときは、居眠りが3回（設定で変更可）になるたびに、寝顔をスタンプつきの「居眠り証明写真」にします。<br>
+    ・起こしミッションがオンのときは、居眠り警告が鳴ったあと「手を挙げる」「まばたき3回」「口を大きく開ける」のどれかをクリアするまで音が止まりません。<br>
+    ・「検知停止」を押すと、今回のレポートと眠気の推移グラフが表示されます。<br>
+    ・URLの後ろに設定を付けると、その設定で開けます（例：?mode=class、?vol=0、?mission=0）。<br>
+    ・片目だけを1秒つぶる（ウインク）と挙手、もう一度ウインクすると手を下ろします。<br>
     ・頭より高く手を挙げて1秒キープしても挙手できます。手を下ろして1秒たつと解除されます。<br>
+    ・クールタイム中も居眠りの警告音は鳴りますが、回数には数えません。<br>
     <br>
     【注意】<br>
     ・カメラ映像はこの端末の中だけで処理され、外部に送信・保存されることはありません。<br>
-    ・開始直後の3秒間はキャリブレーションです。両目を開けて画面を見ていてください。<br>
     ・初回はAIモデルの読み込みに少し時間がかかります。<br>
     ・別のタブやアプリに切り替えると検知は止まります。使用中はこの画面を表示したままにしてください。<br>
     ・このシステムは補助ツールです。運転中などの安全をこれだけに頼らないでください。
@@ -297,26 +827,24 @@ const HAND_MODEL =
 // 画面要素
 // ============================
 
-const video = document.getElementById("video");
-const button = document.getElementById("startButton");
-const calibrateButton = document.getElementById("calibrateButton");
-const statusEl = document.getElementById("status");
-const earText = document.getElementById("ear");
-const warning = document.getElementById("warning");
+const $ = id => document.getElementById(id);
 
-const raiseBox = document.getElementById("raiseBox");
-const raiseLabel = document.getElementById("raiseLabel");
-const progressBar = document.getElementById("progressBar");
-const progressText = document.getElementById("progressText");
-const lowerButton = document.getElementById("lowerButton");
-const logList = document.getElementById("logList");
+const video = $("video");
+const button = $("startButton");
+const calibrateButton = $("calibrateButton");
+const statusEl = $("status");
+const earText = $("ear");
+const mouthText = $("mouth");
+const eventText = $("eventText");
+const warning = $("warning");
+const cooldownText = $("cooldownText");
 
-const drowsyInput = document.getElementById("drowsyInput");
-const winkInput = document.getElementById("winkInput");
-const handInput = document.getElementById("handInput");
-const closedTimeInput = document.getElementById("closedTimeInput");
-const sensitivityInput = document.getElementById("sensitivityInput");
-const volumeInput = document.getElementById("volumeInput");
+const raiseBox = $("raiseBox");
+const raiseLabel = $("raiseLabel");
+const progressBar = $("progressBar");
+const progressText = $("progressText");
+const lowerButton = $("lowerButton");
+const logList = $("logList");
 
 let faceLandmarker = null;
 let handLandmarker = null;
@@ -333,7 +861,7 @@ let lastVideoTime = -1;
 
 const OPEN_GRACE = 500;          // この時間開いていたら「起きた」とみなす（ms）
 const CALIBRATION_TIME = 3000;   // キャリブレーション時間（ms）
-const SMOOTH_FRAMES = 5;         // EARの平均をとるフレーム数
+const SMOOTH_FRAMES = 5;         // EAR・角度の平均をとるフレーム数
 const DEFAULT_OPEN_EAR = 0.28;   // キャリブレーション失敗時の開眼EAR
 
 const WINK_HOLD = 1000;          // ウインクを何ms続けたら挙手か
@@ -343,6 +871,30 @@ const WINK_GAP = 0.25;           // 左右の目の開き具合の差（開眼�
 const HAND_HOLD = 1000;          // 手を何ms挙げ続けたら挙手か
 const HAND_RELEASE = 1000;       // 手を下ろして何ms経ったら解除か
 
+const YAWN_RECOVER = 0.7;        // 口の開きがしきい値のこの割合まで戻ったら「閉じた」とみなす
+const EVENT_SHOW = 3000;         // 「あくびを検知」の表示時間（ms）
+
+// 眠気メーター
+const METER_WINDOW = 60000;      // 目を閉じていた割合・ゆっくりまばたきを見る期間（ms）
+const YAWN_WINDOW = 300000;      // あくびの回数を見る期間（ms）
+const METER_MIN_DATA = 10000;    // メーターを表示するのに必要な測定時間（ms）
+const SLOW_BLINK_MIN = 400;      // この時間以上目を閉じたまばたきを「ゆっくり」とみなす（ms）
+const PERCLOS_FULL = 0.25;       // 目を閉じていた割合がこの値で満点
+const SLOW_BLINK_FULL = 4;       // ゆっくりまばたき（1分）がこの回数で満点
+const YAWN_FULL = 3;             // あくび（5分）がこの回数で満点
+const METER_WARN = 60;           // この値を超えたら休憩をすすめる
+const METER_REARM = 40;          // この値を下回ったら、次の通知ができるようにする
+const SERIES_STEP = 5000;        // グラフ用に眠気を記録する間隔（ms）
+
+// 起こしミッション
+const MISSIONS = {
+    hand:  "✋ 手を頭より高く挙げて1秒キープ！",
+    blink: "👁️ まばたきを3回しよう！",
+    mouth: "😮 口を大きく「あー」と開けて1秒キープ！"
+};
+const MISSION_HOLD = 1000;       // 手・口のミッションで必要なキープ時間（ms）
+const MISSION_BLINKS = 3;        // まばたきミッションで必要な回数
+
 
 // ============================
 // ユーザー設定（ブラウザに保存）
@@ -350,11 +902,43 @@ const HAND_RELEASE = 1000;       // 手を下ろして何ms経ったら解除か
 
 const settings = {
     drowsyEnabled: true,
+    yawnEnabled: true,
+    awayEnabled: true,
+    missionEnabled: true,
+    photoEnabled: true,
+    photoCount: 3,      // 居眠り何回ごとに写真を撮るか
     winkEnabled: true,
     handEnabled: true,
     closedTime: 3,      // 秒
     sensitivity: 0.7,   // 開眼時EARの何割を下回ったら「閉じている」か
+    yawnOpen: 0.5,      // 口の開き具合（縦÷横）のしきい値
+    yawnTime: 1.5,      // 秒
+    awayTime: 10,       // 秒
+    cooldown: 15,       // 秒
     volume: 50          // %
+};
+
+// チェックボックス：id → 設定名
+const CHECKS = {
+    drowsyInput: "drowsyEnabled",
+    yawnInput: "yawnEnabled",
+    awayInput: "awayEnabled",
+    missionInput: "missionEnabled",
+    photoInput: "photoEnabled",
+    winkInput: "winkEnabled",
+    handInput: "handEnabled"
+};
+
+// スライダー：id → [設定名, 表示用の関数]
+const RANGES = {
+    closedTimeInput: ["closedTime", v => v.toFixed(1)],
+    sensitivityInput: ["sensitivity", v => Math.round(v * 100) + "%"],
+    yawnOpenInput: ["yawnOpen", v => v.toFixed(2)],
+    yawnTimeInput: ["yawnTime", v => v.toFixed(1)],
+    awayTimeInput: ["awayTime", v => v],
+    photoCountInput: ["photoCount", v => v],
+    cooldownInput: ["cooldown", v => v],
+    volumeInput: ["volume", v => v]
 };
 
 function loadSettings() {
@@ -368,16 +952,204 @@ function loadSettings() {
         // 保存できない環境でもデフォルト値で動く
     }
 
-    drowsyInput.checked = settings.drowsyEnabled;
-    winkInput.checked = settings.winkEnabled;
-    handInput.checked = settings.handEnabled;
-    closedTimeInput.value = settings.closedTime;
-    sensitivityInput.value = settings.sensitivity;
-    volumeInput.value = settings.volume;
+    // URLで指定された設定を上書き（外付けのパラメーター）
+    applyUrlParams();
+
+    for (const id in CHECKS) {
+        $(id).checked = settings[CHECKS[id]];
+    }
+
+    for (const id in RANGES) {
+        $(id).value = settings[RANGES[id][0]];
+    }
 
     updateSettingLabels();
 
 }
+
+// ============================
+// URLパラメーター（外付けの設定）
+// 例：?mode=class  ?vol=0&mission=0  ?time=2&sens=0.8
+// ============================
+
+const PRESETS = {
+    class: {
+        label: "🏫 授業モード",
+        values: { drowsyEnabled: true, yawnEnabled: true, awayEnabled: true,
+                  winkEnabled: true, handEnabled: true, missionEnabled: false, volume: 20 }
+    },
+    study: {
+        label: "📚 自習モード",
+        values: { drowsyEnabled: true, yawnEnabled: true, awayEnabled: true,
+                  winkEnabled: false, handEnabled: false, missionEnabled: true, volume: 60 }
+    },
+    drive: {
+        label: "🚗 運転モード",
+        values: { drowsyEnabled: true, yawnEnabled: true, awayEnabled: false,
+                  winkEnabled: false, handEnabled: false, missionEnabled: false,
+                  photoEnabled: false, closedTime: 1.5, volume: 100 }
+    }
+};
+
+// URLの名前 → 設定名（オン/オフ）
+const URL_BOOLS = {
+    drowsy: "drowsyEnabled",
+    yawn: "yawnEnabled",
+    away: "awayEnabled",
+    wink: "winkEnabled",
+    hand: "handEnabled",
+    mission: "missionEnabled",
+    photo: "photoEnabled"
+};
+
+// URLの名前 → スライダーのid（数値）
+const URL_NUMBERS = {
+    time: "closedTimeInput",
+    sens: "sensitivityInput",
+    yawnopen: "yawnOpenInput",
+    yawntime: "yawnTimeInput",
+    awaytime: "awayTimeInput",
+    cool: "cooldownInput",
+    vol: "volumeInput",
+    photocount: "photoCountInput"
+};
+
+let urlMode = null;
+
+
+// ============================
+// 研究モード（結果を研究チームのスプレッドシートに自動送信）
+// 使い方：URLの後ろに ?research=1 を付ける
+// ============================
+
+const APP_VERSION = "2026-11-02";
+
+// Google Apps Script の「ウェブアプリのURL」をここに貼る
+// （URLの ?collect=... でも指定できる）
+const COLLECT_URL = "https://script.google.com/macros/s/AKfycbx31N8elkBclTtgvRpW9ETcWtFs96BK1pvO3Whaa3Ns8LwECS-AmiZ4QUxYrPoIOP44Ww/exec";
+
+// 同意画面に表示する問い合わせ先
+const RESEARCH_CONTACT = "研究チーム（123I083 鈴木颯人）";
+
+const research = {
+    enabled: false,      // 研究モードで開いたか
+    url: "",             // 送信先
+    pre: null,           // 開始前アンケートの答え
+    payload: null        // 最後に作った送信データ
+};
+
+const KSS_LABELS = {
+    1: "とてもはっきり目が覚めている",
+    2: "",
+    3: "目が覚めている",
+    4: "",
+    5: "どちらでもない",
+    6: "",
+    7: "眠い（でも起きているのに努力はいらない）",
+    8: "",
+    9: "とても眠い（眠気と戦っている）"
+};
+
+
+function applyUrlParams() {
+
+    const params = new URLSearchParams(location.search);
+    const applied = [];
+
+    // モード（まとめて設定）
+    // 研究モード
+    if (params.get("research") === "1") {
+
+        research.url = params.get("collect") || COLLECT_URL;
+
+        if (/^https:\/\/script\.google\.com\//.test(research.url)) {
+            research.enabled = true;
+            applied.push("🔬 研究モード");
+        } else {
+            applied.push("🔬 研究モード（送信先が未設定のため送信しません）");
+        }
+    }
+
+    const mode = params.get("mode");
+
+    if (mode && PRESETS[mode]) {
+        Object.assign(settings, PRESETS[mode].values);
+        urlMode = mode;
+        applied.push(PRESETS[mode].label);
+    }
+
+    // オン/オフの個別指定
+    for (const name in URL_BOOLS) {
+
+        if (!params.has(name)) continue;
+
+        const v = params.get(name).toLowerCase();
+        const on = ["1", "on", "true", "yes"].includes(v);
+        const off = ["0", "off", "false", "no"].includes(v);
+
+        if (on || off) {
+            settings[URL_BOOLS[name]] = on;
+            applied.push(name + "=" + (on ? "オン" : "オフ"));
+        }
+    }
+
+    // 数値の個別指定（スライダーの範囲内に収める）
+    for (const name in URL_NUMBERS) {
+
+        if (!params.has(name)) continue;
+
+        const v = Number(params.get(name));
+        if (!isFinite(v)) continue;
+
+        const input = $(URL_NUMBERS[name]);
+        const min = Number(input.min);
+        const max = Number(input.max);
+
+        settings[RANGES[URL_NUMBERS[name]][0]] = Math.min(Math.max(v, min), max);
+        applied.push(name + "=" + v);
+    }
+
+    if (applied.length > 0) {
+        $("urlBanner").textContent = "🔗 URLの設定を使っています：" + applied.join("、");
+        $("urlBanner").hidden = false;
+    }
+
+    // 今のモードのボタンを目立たせる
+    document.querySelectorAll(".mode-links a").forEach(a => {
+        a.classList.toggle("current", a.dataset.mode === urlMode);
+    });
+
+}
+
+// 今の設定をすべてURLにする
+function buildSettingsUrl() {
+
+    const params = new URLSearchParams();
+
+    for (const name in URL_BOOLS) {
+        params.set(name, settings[URL_BOOLS[name]] ? 1 : 0);
+    }
+
+    for (const name in URL_NUMBERS) {
+        params.set(name, settings[RANGES[URL_NUMBERS[name]][0]]);
+    }
+
+    return location.origin + location.pathname + "?" + params.toString();
+}
+
+async function copySettingsUrl() {
+
+    const url = buildSettingsUrl();
+
+    try {
+        await navigator.clipboard.writeText(url);
+        showMessage("🔗 今の設定のURLをコピーしました");
+    } catch (e) {
+        prompt("このURLをコピーしてください", url);
+    }
+
+}
+
 
 function saveSettings() {
 
@@ -391,59 +1163,40 @@ function saveSettings() {
 
 function updateSettingLabels() {
 
-    document.getElementById("closedTimeValue").textContent =
-        Number(settings.closedTime).toFixed(1);
-
-    document.getElementById("sensitivityValue").textContent =
-        Math.round(settings.sensitivity * 100) + "%";
-
-    document.getElementById("volumeValue").textContent =
-        settings.volume;
+    for (const id in RANGES) {
+        const [key, format] = RANGES[id];
+        $(id.replace("Input", "Value")).textContent = format(Number(settings[key]));
+    }
 
 }
 
-drowsyInput.addEventListener("change", () => {
-    settings.drowsyEnabled = drowsyInput.checked;
-    if (!settings.drowsyEnabled) {
-        stopWarning();
-        eyesClosedStart = null;
-    }
-    saveSettings();
-});
+for (const id in CHECKS) {
 
-winkInput.addEventListener("change", () => {
-    settings.winkEnabled = winkInput.checked;
-    winkHold.reset();
-    saveSettings();
-});
+    $(id).addEventListener("change", () => {
 
-handInput.addEventListener("change", () => {
-    settings.handEnabled = handInput.checked;
-    handHold.reset();
-    saveSettings();
-});
+        settings[CHECKS[id]] = $(id).checked;
 
-closedTimeInput.addEventListener("input", () => {
-    settings.closedTime = Number(closedTimeInput.value);
-    updateSettingLabels();
-    saveSettings();
-});
+        // オフにした項目の途中経過と警告を消す
+        resetState();
 
-sensitivityInput.addEventListener("input", () => {
-    settings.sensitivity = Number(sensitivityInput.value);
-    updateSettingLabels();
-    saveSettings();
-});
+        saveSettings();
+    });
 
-volumeInput.addEventListener("input", () => {
-    settings.volume = Number(volumeInput.value);
-    updateSettingLabels();
-    saveSettings();
-});
+}
+
+for (const id in RANGES) {
+
+    $(id).addEventListener("input", () => {
+        settings[RANGES[id][0]] = Number($(id).value);
+        updateSettingLabels();
+        saveSettings();
+    });
+
+}
 
 
 // ============================
-// 「一定時間続いたら発動」を判定する部品
+// 「一定時間続いたら発動」を判定する部品（挙手用）
 // ============================
 
 class HoldDetector {
@@ -460,7 +1213,6 @@ class HoldDetector {
         this.fired = false;
     }
 
-    // active: 今その動作をしているか
     // 戻り値: justFired（今発動した）, justReleased（発動後に動作をやめた）, progress（0〜1）
     update(active, now) {
 
@@ -504,23 +1256,39 @@ const handHold = new HoldDetector(HAND_HOLD, HAND_RELEASE);
 // 状態
 // ============================
 
-let openRight = null;    // キャリブレーションで測った開眼時のEAR（本人の右目）
+// キャリブレーションで測る基準値
+let openRight = null;    // 開眼時のEAR（本人の右目）
 let openLeft = null;     // 同（本人の左目）
-
-let rightHistory = [];
-let leftHistory = [];
 
 let calibrating = false;
 let calibrationStart = null;
-let samplesRight = [];
-let samplesLeft = [];
+let samples = { right: [], left: [], mouth: [] };
 
+// 平滑化用
+let history = { right: [], left: [], mouth: [] };
+
+// 居眠り
 let eyesClosedStart = null;
 let eyesOpenStart = null;
 
-let warningActive = false;
-let beepTimer = null;
+// あくび
+let yawnStart = null;
+let yawnCounted = false;
+let eventTimer = null;
 
+// 警告
+const ALERTS = {
+    drowsy: { label: "😴 居眠り", message: "⚠️ 居眠りの可能性があります ⚠️", countId: "countDrowsy" },
+    yawn:   { label: "🥱 あくび", message: "🥱 あくびを検知しました",       countId: "countYawn" },
+    mission: { label: "🔔 起こしミッション", message: "",                   countId: null }
+};
+
+const activeAlerts = new Set();
+let beepTimer = null;
+const lastCountedAt = { drowsy: null, yawn: null };   // 最後に数えた時刻（クールタイム用）
+const counts = { drowsy: 0, yawn: 0 };
+
+// 挙手
 let raised = false;
 let raisedSource = null;
 let raisedAt = null;
@@ -528,14 +1296,46 @@ let raisedAt = null;
 let winkProgress = 0;
 let handProgress = 0;
 
+// 眠気メーター
+let meterLog = [];           // {t, dt, closed} 直近1分の測定記録
+let meterTotalMs = 0;        // meterLog の合計時間
+let meterClosedMs = 0;       // そのうち目を閉じていた時間
+let meterLastT = null;
+let blinkStart = null;       // 目を閉じ始めた時刻（まばたきの長さを測る）
+let slowBlinks = [];         // ゆっくりまばたきの時刻
+let yawnTimes = [];          // あくびの時刻
+let meterScore = null;       // 現在の眠気（0〜100、測定中は null）
+let meterWarned = false;
+let meterViewAt = 0;
+
+// 写真
+let lastFace = null;         // 直近に見えた顔のランドマーク（スタンプの位置に使う）
+let photoNumber = 0;
+
+// 起こしミッション
+let mission = null;          // {type, start, holdStart, blinks, prevClosed, progress}
+let missionHandUp = false;
+
+// 離席
+let lastFaceSeen = null;
+let away = false;
+let awayStart = null;
+let awayCount = 0;
+
+// レポート用（今回の検知開始〜停止）
+let session = null;
+let reportText = "";
+
 
 loadSettings();
+retryPending();
 
 
 // ============================
+// 計算用の関数
+// ============================
+
 // 距離（ピクセル換算）
-// ============================
-
 function distance(a, b) {
 
     const w = video.videoWidth;
@@ -548,11 +1348,7 @@ function distance(a, b) {
 
 }
 
-
-// ============================
 // EAR
-// ============================
-
 function calculateEAR(landmarks, points) {
 
     const p1 = landmarks[points[0]];
@@ -572,6 +1368,18 @@ function calculateEAR(landmarks, points) {
     return (vertical1 + vertical2) / (2 * horizontal);
 }
 
+// 口の開き具合（MAR：縦の開き ÷ 横幅）
+// 閉じていると 0 付近、あくびでは 0.6〜1.0 くらいになる
+function calculateMAR(face) {
+
+    const vertical = distance(face[13], face[14]);     // 上唇の内側 ↔ 下唇の内側
+    const horizontal = distance(face[78], face[308]);  // 口の左右の端（内側）
+
+    if (horizontal === 0) return 0;
+
+    return vertical / horizontal;
+}
+
 function average(list) {
     return list.reduce((sum, v) => sum + v, 0) / list.length;
 }
@@ -579,6 +1387,14 @@ function average(list) {
 function median(list) {
     const sorted = [...list].sort((a, b) => a - b);
     return sorted[Math.floor(sorted.length / 2)];
+}
+
+function pushHistory(key, value) {
+    history[key].push(value);
+    if (history[key].length > SMOOTH_FRAMES) {
+        history[key].shift();
+    }
+    return average(history[key]);
 }
 
 
@@ -590,6 +1406,9 @@ function toggleDetection() {
 
     if (detecting) {
         stopDetection();
+    } else if (research.enabled) {
+        // 研究モードでは同意とアンケートのあとに開始
+        openResearchStart();
     } else {
         startDetection();
     }
@@ -723,6 +1542,8 @@ async function startDetection() {
         detecting = true;
         lastVideoTime = -1;
 
+        startSession();
+
         button.textContent = "検知停止";
         button.disabled = false;
         calibrateButton.disabled = false;
@@ -776,15 +1597,20 @@ function stopDetection() {
     calibrating = false;
 
     stopStream();
-    stopWarning();
     lowerHand("検知停止");
+    endAway(Date.now());
     resetState();
     releaseWakeLock();
+
+    showReport();
 
     button.textContent = "検知開始";
     calibrateButton.disabled = true;
     statusEl.textContent = "検知開始を押してください";
-    earText.textContent = "EAR：---";
+    earText.textContent = "目：---";
+    mouthText.textContent = "口：---";
+    cooldownText.textContent = "";
+    eventText.textContent = "";
 
 }
 
@@ -801,12 +1627,23 @@ function stopStream() {
 }
 
 
+// 途中経過と警告をすべて消す
 function resetState() {
 
-    rightHistory = [];
-    leftHistory = [];
+    history = { right: [], left: [], mouth: [] };
+
     eyesClosedStart = null;
     eyesOpenStart = null;
+    yawnStart = null;
+    yawnCounted = false;
+
+    mission = null;
+    missionHandUp = false;
+
+    for (const key of [...activeAlerts]) {
+        setAlert(key, false);
+    }
+
     winkHold.reset();
     handHold.reset();
     winkProgress = 0;
@@ -847,21 +1684,21 @@ document.addEventListener("visibilitychange", () => {
 
     if (!detecting) return;
 
+    // 非表示中は検知できないので、どちらの場合も途中経過をリセット
+    resetState();
+
     if (document.visibilityState === "visible") {
 
-        // 戻ってきたら状態をリセットして再開
-        resetState();
+        // 非表示だった間を離席や測定時間に数えない
+        lastFaceSeen = Date.now();
+        meterLastT = null;
+        blinkStart = null;
+
         requestWakeLock();
 
         if (audioContext && audioContext.state === "suspended") {
             audioContext.resume().catch(() => {});
         }
-
-    } else {
-
-        // 非表示中は検知できないので警告を止める
-        stopWarning();
-        resetState();
 
     }
 
@@ -889,7 +1726,9 @@ function detectFrame() {
 
             const faceResult = faceLandmarker.detectForVideo(video, timestamp);
 
-            const handResult = settings.handEnabled
+            const needHands = settings.handEnabled || (mission && mission.type === "hand");
+
+            const handResult = needHands
                 ? handLandmarker.detectForVideo(video, timestamp)
                 : null;
 
@@ -912,13 +1751,11 @@ function detectFrame() {
 
 function startCalibration() {
 
-    stopWarning();
     resetState();
 
     calibrating = true;
     calibrationStart = null;
-    samplesRight = [];
-    samplesLeft = [];
+    samples = { right: [], left: [] };
 
     statusEl.textContent = "顔を検出しています...";
 
@@ -929,11 +1766,11 @@ function finishCalibration() {
 
     calibrating = false;
 
-    if (samplesRight.length >= 10) {
+    if (samples.right.length >= 10) {
 
-        // 中央値を開眼時のEARとして使う（まばたきの影響を受けにくい）
-        openRight = median(samplesRight);
-        openLeft = median(samplesLeft);
+        // 中央値を基準にする（まばたきや一瞬の動きの影響を受けにくい）
+        openRight = median(samples.right);
+        openLeft = median(samples.left);
 
     } else {
 
@@ -941,6 +1778,10 @@ function finishCalibration() {
         openLeft = null;
 
     }
+
+    lastFaceSeen = Date.now();
+
+    addLog("キャリブレーション完了");
 
 }
 
@@ -964,7 +1805,23 @@ function onResults(faceResult, handResult, now) {
 
     // 手による挙手（顔が見えなくても判定する）
     if (!calibrating) {
-        handleHand(face, hands, now);
+
+        if (mission) {
+            // ミッション中は挙手として扱わず、ミッションの判定に使う
+            missionHandUp = hands.some(hand => isHandUp(face, hand));
+        } else {
+            handleHand(face, hands, now);
+        }
+    }
+
+    updateCooldownText(now);
+
+    if (face) {
+        endAway(now);
+        lastFaceSeen = now;
+        lastFace = face;
+    } else {
+        lastFace = null;
     }
 
 
@@ -974,9 +1831,9 @@ function onResults(faceResult, handResult, now) {
 
     if (!face) {
 
-        rightHistory = [];
-        leftHistory = [];
-        earText.textContent = "EAR：---";
+        history = { right: [], left: [], mouth: [] };
+        earText.textContent = "目：---";
+        mouthText.textContent = "口：---";
 
         handleWink(false, now);
 
@@ -986,19 +1843,14 @@ function onResults(faceResult, handResult, now) {
             return;
         }
 
-        // 目を閉じた状態から顔が消えた → うつむいた可能性があるのでタイマー継続
-        if (settings.drowsyEnabled && eyesClosedStart !== null) {
+        handleFaceLost(now);
 
-            statusEl.textContent = "😴 顔が見えません（うつむいている可能性）";
-            eyesOpenStart = null;
-            checkClosedTime(now);
-
-        } else {
-
-            statusEl.textContent = "顔を検出できません";
-
+        if (mission) {
+            updateMission({ handUp: missionHandUp, closed: null, mouth: null }, now);
         }
 
+        blinkStart = null;
+        updateMeter(now);
         updateProgress();
         return;
     }
@@ -1009,6 +1861,8 @@ function onResults(faceResult, handResult, now) {
 
     // 本人の左目（映像では右側）
     const leftEAR = calculateEAR(face, [362, 385, 387, 263, 373, 380]);
+
+    const mar = calculateMAR(face);
 
 
     // ----------------------------
@@ -1021,19 +1875,16 @@ function onResults(faceResult, handResult, now) {
             calibrationStart = now;
         }
 
-        samplesRight.push(rightEAR);
-        samplesLeft.push(leftEAR);
+        samples.right.push(rightEAR);
+        samples.left.push(leftEAR);
 
         const remain = Math.ceil(
             (CALIBRATION_TIME - (now - calibrationStart)) / 1000
         );
 
         statusEl.textContent =
-            "キャリブレーション中… 両目を開けて画面を見てください（残り" +
+            "キャリブレーション中… 両目を開けて正面を見てください（残り" +
             Math.max(remain, 0) + "秒）";
-
-        earText.textContent =
-            "EAR 右目 " + rightEAR.toFixed(3) + " / 左目 " + leftEAR.toFixed(3);
 
         if (now - calibrationStart >= CALIBRATION_TIME) {
             finishCalibration();
@@ -1047,47 +1898,141 @@ function onResults(faceResult, handResult, now) {
     // 平滑化（直近数フレームの平均）
     // ----------------------------
 
-    rightHistory.push(rightEAR);
-    leftHistory.push(leftEAR);
+    const right = pushHistory("right", rightEAR);
+    const left = pushHistory("left", leftEAR);
 
-    if (rightHistory.length > SMOOTH_FRAMES) rightHistory.shift();
-    if (leftHistory.length > SMOOTH_FRAMES) leftHistory.shift();
-
-    const right = average(rightHistory);
-    const left = average(leftHistory);
+    const mouth = pushHistory("mouth", mar);
 
     // 開眼時を1としたときの開き具合
     const openR = right / (openRight || DEFAULT_OPEN_EAR);
     const openL = left / (openLeft || DEFAULT_OPEN_EAR);
 
-    const rightClosed = openR < settings.sensitivity;
-    const leftClosed = openL < settings.sensitivity;
-
     earText.textContent =
-        "開き具合 右目 " + Math.round(openR * 100) + "% / 左目 " +
+        "目の開き具合 右 " + Math.round(openR * 100) + "% / 左 " +
         Math.round(openL * 100) + "%（" +
         Math.round(settings.sensitivity * 100) + "%未満で閉じている判定）";
 
+    mouthText.textContent =
+        "口の開き具合 " + mouth.toFixed(2) +
+        "（" + settings.yawnOpen.toFixed(2) + "以上が" +
+        settings.yawnTime.toFixed(1) + "秒続くとあくび）";
+
 
     // ----------------------------
+    // 各判定
+    // ----------------------------
+
+    // ミッション中はあくびを数えない（口を開けるミッションがあるため）
+    const yawning = mission ? false : handleYawn(mouth, now);
+
+    // あくび中は目が細くなるので、居眠り・ウインクの判定はしない
+    let eyeState = "open";
+
+    if (!yawning) {
+        eyeState = handleEyes(openR, openL, now);
+    } else {
+        handleWink(false, now);
+        eyesClosedStart = null;
+    }
+
+    // 起こしミッション
+    if (mission) {
+        updateMission({
+            handUp: missionHandUp,
+            closed: openR < settings.sensitivity && openL < settings.sensitivity,
+            mouth: mouth
+        }, now);
+    }
+
+    // 眠気メーター（あくび中は目が細くなるので測らない）
+    if (!yawning) {
+        recordMeter(eyeState === "closed", now);
+    } else {
+        blinkStart = null;
+        meterLastT = now;
+    }
+
+    updateMeter(now);
+
+
+    // ----------------------------
+    // 状態表示
+    // ----------------------------
+
+    if (yawning) {
+        statusEl.textContent = "🥱 口を大きく開けています";
+    } else if (eyeState === "closed") {
+        statusEl.textContent = "😴 目：閉じています";
+    } else if (eyeState === "wink") {
+        statusEl.textContent = "😉 ウインク中";
+    } else {
+        statusEl.textContent = "👁️ 目：開いています";
+    }
+
+    updateProgress();
+
+}
+
+
+// ============================
+// 顔が見えなくなったとき
+// ============================
+
+function handleFaceLost(now) {
+
+    const messages = [];
+
+    // 目を閉じた状態から顔が消えた → うつむいた可能性があるのでタイマー継続
+    if (settings.drowsyEnabled && eyesClosedStart !== null) {
+        eyesOpenStart = null;
+        checkClosedTime(now);
+        messages.push("うつむいている可能性");
+    }
+
+    // 口を開けたまま顔が消えた（手で口を隠したなど）→ あくびの途中経過はリセット
+    yawnStart = null;
+    yawnCounted = false;
+
+    // 目を閉じていない状態で顔が消えて一定時間たった → 離席
+    if (settings.awayEnabled && eyesClosedStart === null && lastFaceSeen !== null) {
+
+        if (!away && now - lastFaceSeen >= settings.awayTime * 1000) {
+            startAway(lastFaceSeen);
+        }
+
+        if (away) {
+            statusEl.textContent = "🚶 離席中（" + formatDuration(now - awayStart) + "）";
+            return;
+        }
+    }
+
+    statusEl.textContent = messages.length > 0
+        ? "😴 顔が見えません（" + messages.join("・") + "）"
+        : "顔を検出できません";
+
+}
+
+
+// ============================
+// 目（居眠り・ウインク）
+// ============================
+
+function handleEyes(openR, openL, now) {
+
+    const rightClosed = openR < settings.sensitivity;
+    const leftClosed = openL < settings.sensitivity;
+
     // ウインク（片目だけ閉じている）
-    // ----------------------------
-
     const winking =
         settings.winkEnabled &&
+        !mission &&
         rightClosed !== leftClosed &&
         Math.abs(openR - openL) >= WINK_GAP;
 
     handleWink(winking, now);
 
-
-    // ----------------------------
     // 両目を閉じている → 居眠り判定
-    // ----------------------------
-
     if (rightClosed && leftClosed) {
-
-        statusEl.textContent = "😴 目：閉じています";
 
         eyesOpenStart = null;
 
@@ -1100,29 +2045,220 @@ function onResults(faceResult, handResult, now) {
             checkClosedTime(now);
         }
 
+        return "closed";
     }
 
-    // ----------------------------
     // 目が開いている（ウインク含む）
-    // ----------------------------
+    if (eyesOpenStart === null) {
+        eyesOpenStart = now;
+    }
 
-    else {
+    // 一定時間開いていたらリセット（一瞬のブレでは解除しない）
+    if (now - eyesOpenStart >= OPEN_GRACE) {
+        eyesClosedStart = null;
+        setAlert("drowsy", false);
+    }
 
-        statusEl.textContent = winking ? "😉 ウインク中" : "👁️ 目：開いています";
+    return winking ? "wink" : "open";
+}
 
-        if (eyesOpenStart === null) {
-            eyesOpenStart = now;
+function checkClosedTime(now) {
+
+    if (eyesClosedStart === null) return;
+
+    if (now - eyesClosedStart >= settings.closedTime * 1000) {
+        setAlert("drowsy", true);
+    }
+
+}
+
+
+// ============================
+// あくび
+// ============================
+
+function handleYawn(mouth, now) {
+
+    if (!settings.yawnEnabled) return false;
+
+    if (mouth >= settings.yawnOpen) {
+
+        if (yawnStart === null) {
+            yawnStart = now;
         }
 
-        // 一定時間開いていたらリセット（一瞬のブレでは解除しない）
-        if (now - eyesOpenStart >= OPEN_GRACE) {
-            eyesClosedStart = null;
-            stopWarning();
+        // 大きく開けたまま一定時間たったら、1回のあくびとして数える
+        if (!yawnCounted && now - yawnStart >= settings.yawnTime * 1000) {
+            yawnCounted = true;
+            yawnTimes.push(now);
+
+            if (session) {
+                session.cur.yawns++;
+                session.yawnsRaw++;
+            }
+            showEvent("yawn");
+        }
+
+        return true;
+    }
+
+    // 口が閉じたら次のあくびを数えられるようにする
+    if (mouth < settings.yawnOpen * YAWN_RECOVER) {
+        yawnStart = null;
+        yawnCounted = false;
+        return false;
+    }
+
+    // 閉じかけの間は「口を開けている」扱いを続ける
+    return yawnStart !== null;
+}
+
+// 一度きりの出来事（あくび）を表示して数える
+function showEvent(key) {
+
+    countUp(key);
+
+    showMessage(ALERTS[key].message, 660, 880);
+
+}
+
+
+// ============================
+// 警告（居眠り・首ガクン・脇見 共通）
+// ============================
+
+function setAlert(key, on) {
+
+    if (on === activeAlerts.has(key)) return;
+
+    if (on) {
+
+        activeAlerts.add(key);
+
+        // 研究用：クールタイムに関係なく、検知した回数をそのまま数える
+        if (key === "drowsy" && session) {
+            session.cur.drowsy++;
+            session.drowsyRaw++;
+        }
+
+        if (ALERTS[key].countId) {
+            countUp(key);
+        }
+
+        // 居眠り警告 → 起こしミッション開始
+        if (key === "drowsy" && settings.missionEnabled) {
+            startMission(Date.now());
+        }
+
+    } else {
+
+        activeAlerts.delete(key);
+
+    }
+
+    updateAlertView();
+
+}
+
+// クールタイムを過ぎていれば回数に数える
+function countUp(key) {
+
+    const now = Date.now();
+
+    const inCooldown =
+        lastCountedAt[key] !== null &&
+        now - lastCountedAt[key] < settings.cooldown * 1000;
+
+    if (inCooldown) {
+        addLog(ALERTS[key].label + "（クールタイム中のため数えません）");
+        return false;
+    }
+
+    counts[key]++;
+    lastCountedAt[key] = now;
+    $(ALERTS[key].countId).textContent = counts[key];
+
+    addLog(ALERTS[key].label + "（" + counts[key] + "回目）");
+
+    notify("alert", { type: key, count: counts[key] });
+
+    if (session) {
+        session.events.push({ t: now - session.start, type: key });
+    }
+
+    // 居眠りが決まった回数になったら写真
+    if (key === "drowsy" && settings.photoEnabled &&
+        counts[key] % settings.photoCount === 0) {
+        takePhoto(counts[key]);
+    }
+
+    return true;
+}
+
+function updateAlertView() {
+
+    if (activeAlerts.size > 0) {
+
+        warning.textContent = activeAlerts.has("mission")
+            ? missionMessage()
+            : ALERTS[[...activeAlerts][0]].message;
+        document.body.classList.add("alert");
+
+        // 状態が戻るまで1秒ごとに鳴らし続ける
+        if (!beepTimer) {
+            beep();
+            beepTimer = setInterval(beep, 1000);
+        }
+
+    } else {
+
+        warning.textContent = "";
+        document.body.classList.remove("alert");
+
+        if (beepTimer) {
+            clearInterval(beepTimer);
+            beepTimer = null;
         }
 
     }
 
-    updateProgress();
+}
+
+function updateCooldownText(now) {
+
+    const parts = [];
+
+    for (const key in lastCountedAt) {
+
+        if (lastCountedAt[key] === null) continue;
+
+        const remain = Math.ceil((settings.cooldown * 1000 - (now - lastCountedAt[key])) / 1000);
+
+        if (remain > 0) {
+            parts.push(ALERTS[key].label + " あと" + remain + "秒");
+        }
+    }
+
+    cooldownText.textContent = parts.length > 0
+        ? "クールタイム中（" + parts.join(" / ") + "）"
+        : "";
+
+}
+
+function resetCounts() {
+
+    for (const key in counts) {
+        counts[key] = 0;
+        $(ALERTS[key].countId).textContent = 0;
+        lastCountedAt[key] = null;
+    }
+
+    awayCount = 0;
+    $("countAway").textContent = 0;
+
+    cooldownText.textContent = "";
+
+    addLog("回数をリセットしました");
 
 }
 
@@ -1211,9 +2347,13 @@ function raiseHand(source) {
     lowerButton.disabled = false;
 
     addLog("✋ 挙手しました（" + source + "）");
+
+    if (session) {
+        session.raises++;
+    }
     chime();
 
-    notifyRaise();
+    notify("handraise", { raised: true, source: source });
     updateProgress();
 
 }
@@ -1231,22 +2371,8 @@ function lowerHand(reason) {
 
     addLog("手を下ろしました（" + reason + "）");
 
-    notifyRaise();
+    notify("handraise", { raised: false, source: null });
     updateProgress();
-
-}
-
-// 他のプログラムから受け取れるように、挙手の変化をイベントとして出す
-// 例：window.addEventListener("handraise", e => console.log(e.detail));
-function notifyRaise() {
-
-    window.dispatchEvent(new CustomEvent("handraise", {
-        detail: {
-            raised: raised,
-            source: raisedSource,
-            time: new Date().toISOString()
-        }
-    }));
 
 }
 
@@ -1282,6 +2408,1231 @@ function updateProgress() {
 
 }
 
+
+// ============================
+// 眠気メーター
+// ============================
+
+// 1フレーム分の目の状態を記録する
+function recordMeter(closed, now) {
+
+    // 前のフレームからの経過時間（間が空いたときは最大0.2秒として扱う）
+    const dt = meterLastT === null ? 0 : Math.min(now - meterLastT, 200);
+    meterLastT = now;
+
+    meterLog.push({ t: now, dt: dt, closed: closed });
+    meterTotalMs += dt;
+
+    if (session) {
+        session.cur.measuredMs += dt;
+        if (closed) session.cur.closedMs += dt;
+    }
+    if (closed) meterClosedMs += dt;
+
+    // 1分より古い記録を捨てる
+    while (meterLog.length > 0 && now - meterLog[0].t > METER_WINDOW) {
+        const old = meterLog.shift();
+        meterTotalMs -= old.dt;
+        if (old.closed) meterClosedMs -= old.dt;
+    }
+
+    // まばたきの長さを測る
+    if (closed) {
+
+        if (blinkStart === null) {
+            blinkStart = now;
+        }
+
+    } else if (blinkStart !== null) {
+
+        const length = now - blinkStart;
+        blinkStart = null;
+
+        // 居眠り判定より短く、ふつうのまばたきより長いもの
+        if (length >= SLOW_BLINK_MIN && length < settings.closedTime * 1000) {
+            slowBlinks.push(now);
+            if (session) {
+                session.slowBlinks++;
+                session.cur.slowBlinks++;
+            }
+        }
+    }
+
+}
+
+// 眠気を計算して表示する
+function updateMeter(now) {
+
+    // 研究用：1分ごとに記録を区切る
+    if (session && now - session.cur.start >= 60000) {
+        flushMinute(session, now);
+    }
+
+    slowBlinks = slowBlinks.filter(t => now - t <= METER_WINDOW);
+    yawnTimes = yawnTimes.filter(t => now - t <= YAWN_WINDOW);
+
+    if (meterTotalMs < METER_MIN_DATA) {
+
+        meterScore = null;
+
+    } else {
+
+        const perclos = meterClosedMs / meterTotalMs;
+
+        meterScore = Math.round(
+            50 * Math.min(perclos / PERCLOS_FULL, 1) +
+            25 * Math.min(slowBlinks.length / SLOW_BLINK_FULL, 1) +
+            25 * Math.min(yawnTimes.length / YAWN_FULL, 1)
+        );
+
+        // 一定以上の眠気になったら1回だけ休憩をすすめる
+        if (!meterWarned && meterScore >= METER_WARN) {
+            meterWarned = true;
+            showMessage("😪 眠気が高まっています。少し休憩しましょう", 523, 392);
+            addLog("😪 眠気メーターが" + meterScore + "になりました");
+        }
+
+        if (meterWarned && meterScore < METER_REARM) {
+            meterWarned = false;
+        }
+    }
+
+    // レポート用に1秒ごとに記録
+    if (session && meterScore !== null && now - session.lastMeterAt >= 1000) {
+        session.lastMeterAt = now;
+        session.meterSum += meterScore;
+        session.meterCount++;
+        session.cur.meterSum += meterScore;
+        session.cur.meterN++;
+        session.meterMax = Math.max(session.meterMax, meterScore);
+
+        if (now - session.lastSeriesAt >= SERIES_STEP) {
+            session.lastSeriesAt = now;
+            session.series.push({ t: now - session.start, v: meterScore });
+        }
+    }
+
+    // 表示の更新は0.5秒ごと
+    if (now - meterViewAt < 500) return;
+    meterViewAt = now;
+
+    renderMeter();
+
+}
+
+function meterLevel(score) {
+
+    if (score < 30) return { text: "すっきり", color: "#22c55e" };
+    if (score < 60) return { text: "やや眠い", color: "#eab308" };
+    if (score < 80) return { text: "眠い", color: "#f97316" };
+    return { text: "かなり眠い", color: "#dc2626" };
+
+}
+
+function renderMeter() {
+
+    const levelEl = $("meterLevel");
+    const bar = $("meterBar");
+    const detail = $("meterDetail");
+
+    if (!detecting) {
+        levelEl.textContent = "---";
+        bar.style.width = "0%";
+        detail.textContent = "検知を開始すると測定します";
+        return;
+    }
+
+    if (meterScore === null) {
+
+        const remain = Math.ceil((METER_MIN_DATA - meterTotalMs) / 1000);
+
+        levelEl.textContent = "測定中…";
+        levelEl.style.color = "#64748b";
+        bar.style.width = "0%";
+        detail.textContent = "あと" + Math.max(remain, 1) + "秒ほど顔を映してください";
+        return;
+    }
+
+    const level = meterLevel(meterScore);
+
+    levelEl.textContent = meterScore + "　" + level.text;
+    levelEl.style.color = level.color;
+    bar.style.width = meterScore + "%";
+    bar.style.background = level.color;
+
+    detail.textContent =
+        "目を閉じていた割合 " + Math.round(meterClosedMs / meterTotalMs * 100) + "%（1分）／" +
+        "ゆっくりまばたき " + slowBlinks.length + "回（1分）／" +
+        "あくび " + yawnTimes.length + "回（5分）";
+
+}
+
+function resetMeter() {
+
+    meterLog = [];
+    meterTotalMs = 0;
+    meterClosedMs = 0;
+    meterLastT = null;
+    blinkStart = null;
+    slowBlinks = [];
+    yawnTimes = [];
+    meterScore = null;
+    meterWarned = false;
+    meterViewAt = 0;
+
+}
+
+
+// ============================
+// 起こしミッション
+// ============================
+
+function startMission(now) {
+
+    if (mission) return;
+
+    const types = Object.keys(MISSIONS);
+    const type = types[Math.floor(Math.random() * types.length)];
+
+    mission = {
+        type: type,
+        start: now,
+        holdStart: null,
+        blinks: 0,
+        prevClosed: null,
+        progress: 0
+    };
+
+    // ミッション中は挙手の判定を止めるので、途中経過を消しておく
+    winkHold.reset();
+    handHold.reset();
+    winkProgress = 0;
+    handProgress = 0;
+
+    addLog("🔔 起こしミッション開始：" + MISSIONS[type]);
+    notify("mission", { started: true, type: type });
+
+    setAlert("mission", true);
+
+}
+
+// input: { handUp, closed（顔が見えないときは null）, mouth（同じく null） }
+function updateMission(input, now) {
+
+    if (!mission) return;
+
+    let done = false;
+
+    if (mission.type === "blink") {
+
+        if (input.closed !== null) {
+
+            if (mission.prevClosed === null) {
+
+                // 居眠りで目を閉じたまま始まるので、一度目を開けてから数え始める
+                if (!input.closed) mission.prevClosed = false;
+
+            } else {
+
+                // 閉じた → 開いた で1回
+                if (mission.prevClosed && !input.closed) {
+                    mission.blinks++;
+                }
+
+                mission.prevClosed = input.closed;
+            }
+        }
+
+        mission.progress = mission.blinks / MISSION_BLINKS;
+        done = mission.blinks >= MISSION_BLINKS;
+
+    } else {
+
+        const active = mission.type === "hand"
+            ? input.handUp
+            : input.mouth !== null && input.mouth >= settings.yawnOpen;
+
+        if (active) {
+
+            if (mission.holdStart === null) {
+                mission.holdStart = now;
+            }
+
+            mission.progress = Math.min((now - mission.holdStart) / MISSION_HOLD, 1);
+            done = mission.progress >= 1;
+
+        } else {
+
+            mission.holdStart = null;
+            mission.progress = 0;
+
+        }
+    }
+
+    if (done) {
+        finishMission(now);
+    } else {
+        updateAlertView();
+    }
+
+}
+
+function missionMessage() {
+
+    if (!mission) return "";
+
+    let detail;
+
+    if (mission.type === "blink") {
+        detail = "（" + mission.blinks + "/" + MISSION_BLINKS + "回）";
+    } else {
+        detail = "（" + Math.round(mission.progress * 100) + "%）";
+    }
+
+    return "🔔 起こしミッション：" + MISSIONS[mission.type] + detail;
+
+}
+
+function finishMission(now) {
+
+    const length = now - mission.start;
+    const type = mission.type;
+
+    mission = null;
+    missionHandUp = false;
+
+    if (session) {
+        session.missions++;
+        session.missionMs += length;
+    }
+
+    addLog("✅ 起こしミッションクリア（" + formatDuration(length) + "）");
+    notify("mission", { started: false, type: type, seconds: Math.round(length / 1000) });
+
+    setAlert("mission", false);
+
+    showMessage("✅ ミッションクリア！目は覚めましたか？", 784, 1047);
+
+}
+
+
+// ============================
+// 居眠り写真（SNOW風スタンプ＋レース風の枠）
+// ============================
+
+function takePhoto(drowsyCount) {
+
+    const W = video.videoWidth;
+    const H = video.videoHeight;
+
+    if (!W || !H) return;
+
+    const SIDE = 16;       // 左右の枠
+    const TOP = 86;        // 上の枠（タイトル）
+    const BOTTOM = 66;     // 下の枠（日時など）
+    const CHECK = 16;      // チェッカーフラッグのマスの大きさ
+
+    const canvas = document.createElement("canvas");
+    canvas.width = W + SIDE * 2;
+    canvas.height = H + TOP + BOTTOM;
+
+    const ctx = canvas.getContext("2d");
+    const cw = canvas.width;
+    const ch = canvas.height;
+
+    // 背景
+    ctx.fillStyle = "#111827";
+    ctx.fillRect(0, 0, cw, ch);
+
+    // 上下のチェッカーフラッグ
+    for (let i = 0; i * CHECK < cw; i++) {
+        for (let row = 0; row < 2; row++) {
+            ctx.fillStyle = (i + row) % 2 === 0 ? "#fff" : "#111827";
+            ctx.fillRect(i * CHECK, row * CHECK / 2, CHECK, CHECK / 2);
+            ctx.fillRect(i * CHECK, ch - CHECK + row * CHECK / 2, CHECK, CHECK / 2);
+        }
+    }
+
+    // カメラ映像（画面と同じく鏡のように反転、少し明るく鮮やかに）
+    ctx.save();
+    ctx.translate(SIDE + W, TOP);
+    ctx.scale(-1, 1);
+    ctx.filter = "brightness(1.08) saturate(1.25) contrast(1.05)";
+    ctx.drawImage(video, 0, 0, W, H);
+    ctx.restore();
+    ctx.filter = "none";
+
+    // 顔に合わせたスタンプ
+    if (lastFace) {
+        drawFaceStickers(ctx, lastFace, SIDE, TOP, W, H);
+    }
+
+    // 「居眠り」のハンコ
+    drawStamp(ctx, SIDE + W - 80, TOP + H - 80, drowsyCount);
+
+    // タイトル
+    ctx.textAlign = "center";
+    ctx.fillStyle = "#facc15";
+    ctx.font = "bold 30px sans-serif";
+    ctx.fillText("🏁 居眠り違反 証明写真 🏁", cw / 2, CHECK + 46);
+
+    // 下の文字
+    const time = new Date().toLocaleString("ja-JP");
+    const meter = meterScore === null ? "" : "　眠気メーター " + meterScore;
+
+    ctx.fillStyle = "#fff";
+    ctx.font = "bold 18px sans-serif";
+    ctx.fillText("居眠り " + drowsyCount + "回目　" + time + meter, cw / 2, ch - CHECK - 20);
+
+    // 画面に追加
+    const url = canvas.toDataURL("image/jpeg", 0.9);
+    addPhoto(url, drowsyCount);
+
+    // フラッシュとシャッター音
+    flash();
+    playTone(1400, 0, 0.04, 0.5);
+    playTone(900, 0.07, 0.06, 0.5);
+
+    if (session) session.photos++;
+
+    addLog("📸 居眠り写真を撮りました（居眠り" + drowsyCount + "回目）");
+    notify("photo", { count: drowsyCount });
+
+}
+
+function drawFaceStickers(ctx, face, offsetX, offsetY, W, H) {
+
+    // 反転した映像に合わせた座標
+    const px = i => offsetX + (1 - face[i].x) * W;
+    const py = i => offsetY + face[i].y * H;
+
+    const faceWidth = Math.abs(px(234) - px(454));
+
+    ctx.save();
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+
+    // ほっぺのチーク
+    for (const i of [205, 425]) {
+        const r = faceWidth * 0.13;
+        const g = ctx.createRadialGradient(px(i), py(i), 0, px(i), py(i), r);
+        g.addColorStop(0, "rgba(255, 105, 140, 0.55)");
+        g.addColorStop(1, "rgba(255, 105, 140, 0)");
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(px(i), py(i), r, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+    // 頭の横に「💤」
+    const headRight = Math.max(px(234), px(454));
+    ctx.font = Math.round(faceWidth * 0.45) + "px sans-serif";
+    ctx.fillText("💤", headRight, py(10) - faceWidth * 0.05);
+
+    // 口元によだれ「💧」
+    const mouthCorner = px(61) > px(291) ? 61 : 291;
+    ctx.font = Math.round(faceWidth * 0.16) + "px sans-serif";
+    ctx.fillText("💧", px(mouthCorner) + faceWidth * 0.03, py(mouthCorner) + faceWidth * 0.1);
+
+    // 頭の上にキラキラ
+    ctx.font = Math.round(faceWidth * 0.14) + "px sans-serif";
+    ctx.fillText("✨", px(10) - faceWidth * 0.35, py(10) - faceWidth * 0.12);
+    ctx.fillText("⭐", px(10) - faceWidth * 0.1, py(10) - faceWidth * 0.3);
+
+    ctx.restore();
+
+}
+
+function drawStamp(ctx, cx, cy, drowsyCount) {
+
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(-0.25);
+
+    ctx.strokeStyle = "rgba(220, 38, 38, 0.9)";
+    ctx.fillStyle = "rgba(220, 38, 38, 0.9)";
+    ctx.lineWidth = 5;
+
+    ctx.beginPath();
+    ctx.arc(0, 0, 58, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(0, 0, 50, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.font = "bold 26px sans-serif";
+    ctx.fillText("居眠り", 0, -8);
+    ctx.font = "bold 17px sans-serif";
+    ctx.fillText(drowsyCount + "回目", 0, 20);
+
+    ctx.restore();
+
+}
+
+function addPhoto(url, drowsyCount) {
+
+    photoNumber++;
+
+    const item = document.createElement("div");
+    item.className = "photo-item";
+
+    const img = document.createElement("img");
+    img.src = url;
+    img.alt = "居眠り" + drowsyCount + "回目の写真";
+
+    const stamp = new Date().toLocaleString("ja-JP").replace(/[\/: ]/g, "-");
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "inemuri_" + stamp + ".jpg";
+    link.textContent = "⬇ ダウンロード";
+
+    item.appendChild(img);
+    item.appendChild(link);
+
+    $("photoList").prepend(item);
+    $("photoPanel").hidden = false;
+
+}
+
+function flash() {
+
+    const el = $("flash");
+    el.classList.add("on");
+
+    setTimeout(() => {
+        el.classList.remove("on");
+    }, 60);
+
+}
+
+
+// ============================
+// 眠気グラフ（レポート用）
+// ============================
+
+const CHART = {
+    w: 600, h: 230,
+    left: 34, right: 12, top: 12, bottom: 30,
+    line: "#2563eb",
+    events: { drowsy: "#dc2626", yawn: "#d97706", away: "#64748b" },
+    eventNames: { drowsy: "😴 居眠り", yawn: "🥱 あくび", away: "🚶 離席" }
+};
+
+function drawChart(series, events, length) {
+
+    const box = $("reportChart");
+    const tip = $("chartTip");
+    tip.style.display = "none";
+
+    if (series.length < 2) {
+        box.innerHTML = '<div class="chart-empty">測定時間が短いため、グラフはありません（1分ほど使うと表示されます）</div>';
+        return;
+    }
+
+    const { w, h, left, right, top, bottom } = CHART;
+    const plotW = w - left - right;
+    const plotH = h - top - bottom;
+    const end = Math.max(length, series[series.length - 1].t, 1);
+
+    const x = t => left + (t / end) * plotW;
+    const y = v => top + (1 - v / 100) * plotH;
+
+    const ns = "http://www.w3.org/2000/svg";
+    const el = (name, attrs, parent) => {
+        const e = document.createElementNS(ns, name);
+        for (const k in attrs) e.setAttribute(k, attrs[k]);
+        if (parent) parent.appendChild(e);
+        return e;
+    };
+
+    const svg = el("svg", {
+        viewBox: "0 0 " + w + " " + h,
+        role: "img",
+        "aria-label": "眠気メーターの推移グラフ"
+    });
+
+    // 横線（レベルの境目）と目盛り
+    const levels = [[0, ""], [30, "やや眠い"], [60, "眠い"], [80, "かなり眠い"], [100, ""]];
+
+    for (const [v, name] of levels) {
+
+        el("line", {
+            x1: left, x2: w - right, y1: y(v), y2: y(v),
+            stroke: v === 0 ? "#94a3b8" : "#e2e8f0", "stroke-width": 1
+        }, svg);
+
+        el("text", {
+            x: left - 6, y: y(v) + 4, "text-anchor": "end",
+            "font-size": 11, fill: "#64748b"
+        }, svg).textContent = v;
+
+        if (name) {
+            el("text", {
+                x: w - right - 2, y: y(v) - 4, "text-anchor": "end",
+                "font-size": 10, fill: "#94a3b8"
+            }, svg).textContent = name;
+        }
+    }
+
+    // 時間の目盛り（分）
+    const minutes = end / 60000;
+    const steps = [1, 2, 5, 10, 15, 30, 60];
+    const step = steps.find(st => minutes / st <= 6) || 120;
+
+    for (let m = 0; m <= minutes + 0.001; m += step) {
+        el("text", {
+            x: x(m * 60000), y: h - 10, "text-anchor": "middle",
+            "font-size": 11, fill: "#64748b"
+        }, svg).textContent = m + "分";
+    }
+
+    // 眠気の折れ線
+    const points = series.map(p => x(p.t).toFixed(1) + "," + y(p.v).toFixed(1)).join(" ");
+
+    el("polyline", {
+        points: points, fill: "none", stroke: CHART.line,
+        "stroke-width": 2, "stroke-linejoin": "round", "stroke-linecap": "round"
+    }, svg);
+
+    // 出来事（居眠り・あくび・離席）を下側に点で表示
+    const eventY = { drowsy: y(8), yawn: y(8), away: y(8) };
+
+    for (const ev of events) {
+        const c = el("circle", {
+            cx: x(Math.min(ev.t, end)), cy: eventY[ev.type], r: 5,
+            fill: CHART.events[ev.type], stroke: "#fff", "stroke-width": 2
+        }, svg);
+        el("title", {}, c).textContent =
+            CHART.eventNames[ev.type] + "（" + formatDuration(ev.t) + "）";
+    }
+
+    // なぞると値を表示する
+    const cross = el("line", {
+        y1: top, y2: top + plotH, stroke: "#94a3b8", "stroke-width": 1,
+        "stroke-dasharray": "3 3", visibility: "hidden"
+    }, svg);
+
+    const dot = el("circle", {
+        r: 5, fill: CHART.line, stroke: "#fff", "stroke-width": 2, visibility: "hidden"
+    }, svg);
+
+    // なぞりやすいように、グラフ全体を透明な四角で覆う
+    el("rect", {
+        x: left, y: top, width: plotW, height: plotH, fill: "transparent"
+    }, svg);
+
+    const hide = () => {
+        cross.setAttribute("visibility", "hidden");
+        dot.setAttribute("visibility", "hidden");
+        tip.style.display = "none";
+    };
+
+    svg.addEventListener("pointermove", e => {
+
+        const rect = svg.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width * w;
+
+        if (px < left || px > w - right) {
+            hide();
+            return;
+        }
+
+        // いちばん近い点
+        let best = series[0];
+        for (const p of series) {
+            if (Math.abs(x(p.t) - px) < Math.abs(x(best.t) - px)) best = p;
+        }
+
+        // 近くの出来事
+        const near = events.filter(ev => Math.abs(x(ev.t) - x(best.t)) < 8)
+                           .map(ev => CHART.eventNames[ev.type]);
+
+        const bx = x(best.t);
+        const by = y(best.v);
+
+        cross.setAttribute("x1", bx);
+        cross.setAttribute("x2", bx);
+        cross.setAttribute("visibility", "visible");
+        dot.setAttribute("cx", bx);
+        dot.setAttribute("cy", by);
+        dot.setAttribute("visibility", "visible");
+
+        tip.textContent = formatDuration(best.t) + "　眠気 " + best.v +
+            (near.length > 0 ? "　" + near.join("・") : "");
+        tip.style.left = (bx / w * rect.width) + "px";
+        tip.style.top = (by / h * rect.height) + "px";
+        tip.style.display = "block";
+
+    });
+
+    svg.addEventListener("pointerleave", hide);
+
+    box.innerHTML = "";
+    box.appendChild(svg);
+
+}
+
+
+// ============================
+// 離席
+// ============================
+
+function startAway(since) {
+
+    away = true;
+    awayStart = since;
+    awayCount++;
+
+    $("countAway").textContent = awayCount;
+
+    if (session) {
+        session.aways++;
+        session.events.push({ t: since - session.start, type: "away" });
+    }
+
+    addLog("🚶 離席しました（" + awayCount + "回目）");
+    notify("away", { away: true, count: awayCount });
+
+}
+
+function endAway(now) {
+
+    if (!away) return;
+
+    const length = now - awayStart;
+
+    away = false;
+    awayStart = null;
+
+    if (session) session.awayMs += length;
+
+    addLog("戻りました（離席 " + formatDuration(length) + "）");
+    notify("away", { away: false, duration: Math.round(length / 1000) });
+
+}
+
+function formatDuration(ms) {
+
+    const total = Math.floor(ms / 1000);
+    const h = Math.floor(total / 3600);
+    const m = Math.floor((total % 3600) / 60);
+    const sec = total % 60;
+
+    if (h > 0) return h + "時間" + m + "分";
+    if (m > 0) return m + "分" + sec + "秒";
+    return sec + "秒";
+
+}
+
+
+// ============================
+// レポート
+// ============================
+
+function startSession() {
+
+    resetMeter();
+    closeReport();
+
+    session = {
+        start: Date.now(),
+        base: { ...counts },
+        raises: 0,
+        aways: 0,
+        awayMs: 0,
+        slowBlinks: 0,
+        meterSum: 0,
+        meterCount: 0,
+        meterMax: 0,
+        lastMeterAt: 0,
+        lastSeriesAt: 0,
+        series: [],
+        events: [],
+        missions: 0,
+        missionMs: 0,
+        photos: 0,
+        // 研究用
+        research: research.enabled ? research.pre : null,
+        minutes: [],
+        cur: newMinute(Date.now()),
+        yawnsRaw: 0,
+        drowsyRaw: 0
+    };
+
+    lastFaceSeen = null;
+    away = false;
+
+}
+
+function showReport() {
+
+    if (!session) return;
+
+    const s = session;
+    session = null;
+
+    const length = Date.now() - s.start;
+    const drowsy = counts.drowsy - s.base.drowsy;
+    const yawn = counts.yawn - s.base.yawn;
+    const avg = s.meterCount > 0 ? Math.round(s.meterSum / s.meterCount) : null;
+
+    // ひとこと
+    let comment;
+
+    if (avg === null) {
+        comment = "測定時間が短かったため、眠気メーターは計算できませんでした。";
+    } else if (drowsy === 0 && avg < 30) {
+        comment = "😊 しっかり集中できていました！";
+    } else if (drowsy <= 1 && avg < 60) {
+        comment = "🙂 ときどき眠そうな様子がありました。";
+    } else {
+        comment = "😪 かなり眠そうでした。休憩や睡眠をとりましょう。";
+    }
+
+    const rows = [
+        ["⏱ 使用時間", formatDuration(length)],
+        ["😴 居眠り", drowsy + "回"],
+        ["🥱 あくび", yawn + "回"],
+        ["🚶 離席", s.aways + "回（合計 " + formatDuration(s.awayMs) + "）"],
+        ["✋ 挙手", s.raises + "回"],
+        ["😪 眠気メーター", avg === null ? "---" : "平均 " + avg + "／最高 " + s.meterMax],
+        ["👁️ ゆっくりまばたき", s.slowBlinks + "回"],
+        ["📸 居眠り写真", s.photos + "枚"],
+        ["🔔 起こしミッション", s.missions === 0 ? "0回"
+            : s.missions + "回（平均 " + formatDuration(s.missionMs / s.missions) + "でクリア）"]
+    ];
+
+    const table = $("reportTable");
+    table.innerHTML = "";
+
+    for (const [label, value] of rows) {
+        const tr = document.createElement("tr");
+        const th = document.createElement("th");
+        const td = document.createElement("td");
+        th.textContent = label;
+        td.textContent = value;
+        tr.appendChild(th);
+        tr.appendChild(td);
+        table.appendChild(tr);
+    }
+
+    $("reportComment").textContent = comment;
+
+    drawChart(s.series, s.events, length);
+
+    // 研究モード：送信データを作り、終了後アンケートへ
+    research.payload = null;
+    $("researchStatus").textContent = "";
+    $("saveDataButton").hidden = true;
+
+    if (s.research) {
+        flushMinute(s, Date.now(), true);
+        research.payload = buildPayload(s, length, drowsy, yawn, avg);
+        $("saveDataButton").hidden = false;
+        setTimeout(openPostSurvey, 300);
+    }
+
+    const date = new Date(s.start).toLocaleString("ja-JP");
+
+    reportText =
+        "【居眠り・挙手検知レポート】" + date + "\n" +
+        rows.map(([label, value]) => label + "：" + value).join("\n") + "\n" +
+        comment;
+
+    $("report").hidden = false;
+    $("report").scrollIntoView({ behavior: "smooth", block: "start" });
+
+    renderMeter();
+
+}
+
+// ============================
+// 研究モード：記録・アンケート・送信
+// ============================
+
+function newMinute(t) {
+    return { start: t, meterSum: 0, meterN: 0, closedMs: 0, measuredMs: 0, slowBlinks: 0, yawns: 0, drowsy: 0 };
+}
+
+// 1分ぶんの記録を確定する
+function flushMinute(s, now, final = false) {
+
+    const c = s.cur;
+    const sec = Math.round((now - c.start) / 1000);
+
+    // 最後の端数が短すぎるときは捨てる
+    if (!(final && sec < 10)) {
+        s.minutes.push({
+            min: s.minutes.length + 1,
+            sec: sec,
+            meter: c.meterN > 0 ? Math.round(c.meterSum / c.meterN) : "",
+            perclos: c.measuredMs > 0 ? Math.round(c.closedMs / c.measuredMs * 1000) / 10 : "",
+            measuredSec: Math.round(c.measuredMs / 1000),
+            slowBlinks: c.slowBlinks,
+            yawns: c.yawns,
+            drowsy: c.drowsy
+        });
+    }
+
+    s.cur = newMinute(now);
+
+}
+
+function buildPayload(s, length, drowsy, yawn, avg) {
+
+    return {
+        version: APP_VERSION,
+        sessionId: s.start.toString(36) + "-" + Math.random().toString(36).slice(2, 8),
+        participant: s.research.participant,
+        startedAt: new Date(s.start).toISOString(),
+        endedAt: new Date(s.start + length).toISOString(),
+        durationSec: Math.round(length / 1000),
+        mode: urlMode || "",
+        device: /Mobi|Android|iPhone|iPad/.test(navigator.userAgent) ? "スマホ" : "PC",
+        pre: { kss: s.research.kss, sleep: s.research.sleep },
+        post: { kss: "" },
+        summary: {
+            drowsy: s.drowsyRaw,
+            drowsyCounted: drowsy,
+            yawn: s.yawnsRaw,
+            yawnCounted: yawn,
+            aways: s.aways,
+            awaySec: Math.round(s.awayMs / 1000),
+            raises: s.raises,
+            meterAvg: avg === null ? "" : avg,
+            meterMax: avg === null ? "" : s.meterMax,
+            slowBlinks: s.slowBlinks,
+            missions: s.missions,
+            missionAvgSec: s.missions > 0 ? Math.round(s.missionMs / s.missions / 1000) : "",
+            photos: s.photos
+        },
+        settings: {
+            closedTime: settings.closedTime,
+            sensitivity: settings.sensitivity,
+            yawnOpen: settings.yawnOpen,
+            yawnTime: settings.yawnTime,
+            cooldown: settings.cooldown,
+            mission: settings.missionEnabled ? 1 : 0
+        },
+        minutes: s.minutes,
+        events: s.events.map(ev => ({ t: Math.round(ev.t / 1000), type: ev.type }))
+    };
+
+}
+
+// ---------- 画面（モーダル） ----------
+
+function openModal(html) {
+    $("modalBox").innerHTML = html;
+    $("modal").hidden = false;
+    $("modalBox").scrollTop = 0;
+}
+
+function closeModal() {
+    $("modal").hidden = true;
+    $("modalBox").innerHTML = "";
+}
+
+function kssOptions(name) {
+
+    let html = '<div class="kss">';
+
+    for (let i = 1; i <= 9; i++) {
+        const label = KSS_LABELS[i] ? "　" + KSS_LABELS[i] : "";
+        html += '<label><input type="radio" name="' + name + '" value="' + i + '"><b>' + i + '</b>' + label + '</label>';
+    }
+
+    return html + "</div>";
+
+}
+
+function loadResearchValue(key) {
+    try { return localStorage.getItem(key) || ""; } catch (e) { return ""; }
+}
+
+function saveResearchValue(key, value) {
+    try { localStorage.setItem(key, value); } catch (e) { /* 無視 */ }
+}
+
+// 開始ボタン → 同意（初回のみ）→ 開始前アンケート → 検知開始
+function openResearchStart() {
+
+    if (loadResearchValue("researchConsent") === "yes") {
+        openPreSurvey();
+    } else {
+        openConsent();
+    }
+
+}
+
+function openConsent() {
+
+    openModal(
+        '<h2>🔬 研究へのご協力のお願い</h2>' +
+        '<p>このページは、居眠り検知の研究のためのものです。検知の結果を研究チームのGoogleスプレッドシートに自動で送信します。</p>' +
+        '<ul>' +
+        '<li><b>送信するもの</b>：参加者番号、アンケートの答え、居眠り・あくびなどの回数、眠気メーターの数値、使用時間</li>' +
+        '<li><b>送信しないもの</b>：カメラの映像、写真、名前</li>' +
+        '<li>参加は自由です。いつでも「検知停止」を押してやめられます</li>' +
+        '<li>集めたデータは、この研究の目的以外には使いません</li>' +
+        '</ul>' +
+        '<p>問い合わせ先：' + RESEARCH_CONTACT + '</p>' +
+        '<div class="modal-buttons">' +
+        '<button onclick="acceptConsent()">同意して進む</button>' +
+        '<button class="secondary" onclick="declineConsent()">同意しない（送信せずに使う）</button>' +
+        '</div>'
+    );
+
+}
+
+function acceptConsent() {
+    saveResearchValue("researchConsent", "yes");
+    openPreSurvey();
+}
+
+function declineConsent() {
+
+    research.enabled = false;
+    closeModal();
+
+    $("urlBanner").textContent = "🔬 研究に同意しなかったため、結果は送信しません";
+    $("urlBanner").hidden = false;
+
+    startDetection();
+
+}
+
+function openPreSurvey() {
+
+    const id = loadResearchValue("researchParticipant");
+
+    openModal(
+        '<h2>開始前のアンケート（3問）</h2>' +
+        '<p class="q">① 参加者番号（例：P01）</p>' +
+        '<input type="text" id="preId" maxlength="20" autocomplete="off" value="' + id.replace(/[^A-Za-z0-9_-]/g, "") + '">' +
+        '<p class="q">② 今どれくらい眠いですか？</p>' +
+        kssOptions("preKss") +
+        '<p class="q">③ 昨夜の睡眠時間</p>' +
+        '<select id="preSleep">' +
+        '<option value="">選んでください</option>' +
+        '<option>4時間未満</option><option>4〜5時間</option><option>5〜6時間</option>' +
+        '<option>6〜7時間</option><option>7〜8時間</option><option>8時間以上</option>' +
+        '</select>' +
+        '<p id="modalError" class="modal-error"></p>' +
+        '<div class="modal-buttons">' +
+        '<button onclick="submitPreSurvey()">回答して検知開始</button>' +
+        '<button class="secondary" onclick="closeModal()">キャンセル</button>' +
+        '</div>'
+    );
+
+}
+
+function submitPreSurvey() {
+
+    const id = $("preId").value.trim();
+    const kss = document.querySelector('input[name="preKss"]:checked');
+    const sleep = $("preSleep").value;
+
+    if (!/^[A-Za-z0-9_-]{1,20}$/.test(id)) {
+        $("modalError").textContent = "参加者番号は半角の英数字で入力してください（例：P01）";
+        return;
+    }
+
+    if (!kss || !sleep) {
+        $("modalError").textContent = "すべての質問に答えてください";
+        return;
+    }
+
+    saveResearchValue("researchParticipant", id);
+
+    research.pre = { participant: id, kss: Number(kss.value), sleep: sleep };
+
+    closeModal();
+    startDetection();
+
+}
+
+function openPostSurvey() {
+
+    if (!research.payload) return;
+
+    openModal(
+        '<h2>終了後のアンケート（1問）</h2>' +
+        '<p class="q">今どれくらい眠いですか？</p>' +
+        kssOptions("postKss") +
+        '<p id="modalError" class="modal-error"></p>' +
+        '<div class="modal-buttons">' +
+        '<button onclick="submitPostSurvey(false)">回答して送信</button>' +
+        '<button class="secondary" onclick="submitPostSurvey(true)">答えずに送信</button>' +
+        '</div>'
+    );
+
+}
+
+function submitPostSurvey(skip) {
+
+    const kss = document.querySelector('input[name="postKss"]:checked');
+
+    if (!skip && !kss) {
+        $("modalError").textContent = "1つ選んでください";
+        return;
+    }
+
+    research.payload.post.kss = kss && !skip ? Number(kss.value) : "";
+
+    closeModal();
+    sendResearch(research.payload);
+
+}
+
+// ---------- 送信 ----------
+
+async function postToCollector(payload) {
+
+    // Apps Script はブラウザからの応答を読めない（no-cors）ので、
+    // 通信エラーが出なければ送信できたとみなす
+    await fetch(research.url, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(payload)
+    });
+
+}
+
+function loadPending() {
+    try { return JSON.parse(localStorage.getItem("researchPending")) || []; } catch (e) { return []; }
+}
+
+function savePending(list) {
+    try { localStorage.setItem("researchPending", JSON.stringify(list.slice(-20))); } catch (e) { /* 無視 */ }
+}
+
+async function sendResearch(payload) {
+
+    const status = $("researchStatus");
+    status.textContent = "📤 研究用データを送信しています…";
+
+    try {
+
+        await postToCollector(payload);
+
+        status.textContent = "✅ 研究用データを送信しました。ご協力ありがとうございました！";
+        addLog("🔬 研究用データを送信しました");
+
+        retryPending();
+
+    } catch (e) {
+
+        console.warn(e);
+
+        const list = loadPending();
+        list.push(payload);
+        savePending(list);
+
+        status.textContent = "⚠️ 送信できませんでした。次にこのページを開いたときに自動で再送します。念のため「結果をファイルで保存」も押してください。";
+        addLog("⚠️ 研究用データの送信に失敗しました（あとで再送します）");
+
+    }
+
+}
+
+// 前に送れなかったデータを再送する
+async function retryPending() {
+
+    if (!research.enabled) return;
+
+    const list = loadPending();
+    if (list.length === 0) return;
+
+    const remain = [];
+
+    for (const payload of list) {
+        try {
+            await postToCollector(payload);
+        } catch (e) {
+            remain.push(payload);
+        }
+    }
+
+    savePending(remain);
+
+    if (remain.length < list.length) {
+        addLog("🔬 前回送れなかったデータを" + (list.length - remain.length) + "件再送しました");
+    }
+
+}
+
+// 送信できない場合の予備：結果をファイルで保存
+function saveResearchFile() {
+
+    if (!research.payload) return;
+
+    const blob = new Blob([JSON.stringify(research.payload, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "inemuri_" + research.payload.participant + "_" + research.payload.sessionId + ".json";
+    a.click();
+
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+}
+
+
+function closeReport() {
+    $("report").hidden = true;
+}
+
+async function copyReport() {
+
+    try {
+        await navigator.clipboard.writeText(reportText);
+        showMessage("📋 レポートをコピーしました");
+    } catch (e) {
+        // コピーできない環境では選択できる形で表示
+        prompt("このテキストをコピーしてください", reportText);
+    }
+
+}
+
+// 一時的なメッセージを表示する（音つきも可）
+function showMessage(text, toneA, toneB) {
+
+    eventText.textContent = text;
+
+    if (toneA) {
+        chime(toneA, toneB);
+    }
+
+    clearTimeout(eventTimer);
+    eventTimer = setTimeout(() => {
+        eventText.textContent = "";
+    }, EVENT_SHOW);
+
+}
+
+
+// ============================
+// 外部への通知（他のプログラムから受け取れるイベント）
+// 例：window.addEventListener("alert", e => console.log(e.detail));
+//     window.addEventListener("handraise", e => console.log(e.detail));
+// ============================
+
+function notify(name, detail) {
+
+    detail.time = new Date().toISOString();
+
+    window.dispatchEvent(new CustomEvent(name, { detail: detail }));
+
+}
+
 function addLog(text) {
 
     const time = new Date().toLocaleTimeString("ja-JP");
@@ -1290,58 +3641,6 @@ function addLog(text) {
     li.textContent = time + "　" + text;
 
     logList.prepend(li);
-
-}
-
-
-// ============================
-// 居眠りの閉眼時間チェック
-// ============================
-
-function checkClosedTime(now) {
-
-    if (eyesClosedStart === null) return;
-
-    if (now - eyesClosedStart >= settings.closedTime * 1000) {
-        showWarning();
-    }
-
-}
-
-
-// ============================
-// 居眠り警告
-// ============================
-
-function showWarning() {
-
-    if (warningActive) return;
-
-    warningActive = true;
-
-    warning.textContent = "⚠️ 居眠りの可能性があります ⚠️";
-    document.body.classList.add("alert");
-
-    // 目を開けるまで1秒ごとに鳴らし続ける
-    beep();
-    beepTimer = setInterval(beep, 1000);
-
-}
-
-
-function stopWarning() {
-
-    if (!warningActive) return;
-
-    warningActive = false;
-
-    warning.textContent = "";
-    document.body.classList.remove("alert");
-
-    if (beepTimer) {
-        clearInterval(beepTimer);
-        beepTimer = null;
-    }
 
 }
 
@@ -1377,7 +3676,7 @@ function playTone(frequency, startOffset, duration, volumeScale) {
 
 }
 
-// 居眠り警告音（＋対応端末ではバイブ）
+// 警告音（＋対応端末ではバイブ）
 function beep() {
 
     if (navigator.vibrate) {
@@ -1388,11 +3687,11 @@ function beep() {
 
 }
 
-// 挙手の合図音（ピンポン）
-function chime() {
+// 合図音（ピンポン）：挙手・あくびで使う
+function chime(first = 988, second = 1319) {
 
-    playTone(988, 0, 0.15, 0.4);
-    playTone(1319, 0.15, 0.3, 0.4);
+    playTone(first, 0, 0.15, 0.4);
+    playTone(second, 0.15, 0.3, 0.4);
 
 }
 
